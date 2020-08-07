@@ -2,9 +2,9 @@
   "name": "editor",
   "version": "1.0.0",
   "description": "Rich Text Editor",
-  "author": "Hamzaalam",
-  "license": "MIT",
-  "repository": "Hamzaalam/editor",
+  "author": "contco",
+  "license": "none",
+  "repository": "contco/editor",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
@@ -27,6 +27,8 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@svgr/webpack": "^5.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -36,8 +38,8 @@
     "@types/react-dom": "^16.9.7",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
-    "microbundle-crl": "^0.13.10",
     "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.7.0",
@@ -50,14 +52,25 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-standard": "^4.0.1",
     "gh-pages": "^2.2.0",
+    "microbundle-crl": "^0.13.10",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@types/styled-components": "^5.1.2",
+    "is-url": "^1.2.4",
+    "slate": "^0.58.4",
+    "slate-history": "^0.58.4",
+    "slate-react": "^0.58.4",
+    "styled-components": "^5.1.1"
+  }
 }
