@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
-    "@svgr/webpack": "^5.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -58,9 +57,14 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
-    "typescript": "^3.7.5",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "rollup": "^2.23.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.3",
+    "rollup-plugin-postcss": "^3.1.4",
+    "rollup-plugin-svg": "^2.0.0",
+    "typescript": "^3.7.5"
   },
   "files": [
     "dist"

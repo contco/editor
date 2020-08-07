@@ -1,0 +1,1 @@
+npm install -D rollup rollup-plugin-babel rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-peer-deps-external rollup-plugin-postcss  

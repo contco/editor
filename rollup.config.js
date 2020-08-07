@@ -1,18 +1,35 @@
+import babel from 'rollup-plugin-babel'
+import commonjs from 'rollup-plugin-commonjs'
+import postcss from 'rollup-plugin-postcss'
+import resolve from 'rollup-plugin-node-resolve'
+import svg from 'rollup-plugin-svg'
+import pkg from './package.json'
+
 export default {
-    input: 'src/main.js',
-    output: [
-      {
-        file: 'esm/index.js',
-        format: 'es',
-      }
-    ],
-    plugins: [
-      babel({
-        exclude: 'node_modules/**',
-        runtimeHelpers: true,
-      }),
-    ],
-    external (id) {
-      return /@babel\/runtime/.test(id);
+  input: 'src/index.js',
+  output: [
+    {
+      file: pkg.main,
+      format: 'cjs'
     },
-  }
+    {
+      file: pkg.module,
+      format: 'es'
+    }
+  ],
+  external: [
+    'react',
+    'react-dom',
+    'prop-types'
+  ],
+  entry: 'src/input.js',
+  dest: 'dist/output.js',
+  plugins: 
+  [
+    svg(),
+    resolve(),
+    commonjs(),
+    postcss({}),
+    babel({ exclude: 'node_modules/**' })
+  ]
+}
