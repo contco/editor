@@ -25,9 +25,9 @@ export const StyledButton = styled.span<ButtonProps>`
 `;
 export const Button: (props: ButtonProps) => any = React.forwardRef(
   ({ active, reversed, ...props }, ref) => (
-    <>
+    <div>
       <StyledButton ref={ref} active={active} reversed={reversed} {...props} />
-    </>
+    </div>
   )
 );
 
@@ -46,9 +46,9 @@ export const StyledIcon = styled.svg`
 
 export const Icon: (props: IconProps) => any = React.forwardRef(
   ({ svg, color = "#ffffff" }, ref) => (
-    <>
+    <div>
       <StyledIcon as={svg} color={color} ref={ref} width="11px" height="14px" />
-    </>
+    </div>
   )
 );
 
