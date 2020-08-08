@@ -24,7 +24,3 @@ class Example extends Component {
   }
 }
 ```
-
-## License
-
-MIT © [Hamzaalam](https://github.com/Hamzaalam)
