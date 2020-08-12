@@ -8,14 +8,14 @@ import { LinkButton, insertLink } from "./LinkHelper";
 import { Range } from "slate";
 import styled from "styled-components";
 //icons
-import {ReactComponent as Bold } from "../assets/bold.svg";
+import {ReactComponent as Bold }from "../assets/bold.svg";
 import {ReactComponent as Coding} from "../assets/coding.svg";
-import {ReactComponent as Italic }from "../assets/italic.svg";
-import {ReactComponent as Link } from "../assets/link.svg";
-import {ReactComponent as Quote }from "../assets/quote.svg";
+import {ReactComponent as Italic} from "../assets/italic.svg";
+import {ReactComponent as Link} from "../assets/link.svg";
+import {ReactComponent as Quote} from "../assets/quote.svg";
 import {ReactComponent as Underline} from "../assets/underline.svg";
-import {ReactComponent as H1 }from "../assets/h1.svg";
-import {ReactComponent as H2 } from "../assets/h2.svg";
+import {ReactComponent as H1} from "../assets/h1.svg";
+import {ReactComponent as H2} from "../assets/h2.svg";
 
 export interface ToolBarProps { }
 
@@ -24,9 +24,9 @@ const ToolBar: React.FC<ToolBarProps> = () => {
   const [isInput, setIsInput] = useState<boolean>(false);
   const [inputToolbarPosition, setInputToolbarPosition] = useState<any>({});
   const [selectedArea, setSelectedArea] = useState<any>({});
-  const ref = useRef<HTMLDivElement>(null);
-  const inputMenuRef = useRef<HTMLDivElement>(null);;
-  const inputContainerRef = createRef() as React.MutableRefObject<HTMLInputElement>;
+  const ref = useRef();
+  const inputMenuRef = useRef();
+  const inputContainerRef = createRef<any>();
   const editor = useSlate();
   let el: any;
   let rect: any;

@@ -22,11 +22,10 @@ interface Props {
   attributes?: any;
   children?: ReactNode;
   element?: any;
-  theme?: any;
 }
-const Editor: (props: Props) => any = ({ data, setContent, readOnly, theme }) => {
+const Editor: (props: Props) => any = ({ data, setContent, readOnly }) => {
   const editor = useMemo(() => withLinks(withHistory(withReact(createEditor()))), []);
-  const renderElement = useCallback((props) => <Element {...props} theme={theme}/>, []);
+  const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
   return (
@@ -50,6 +49,7 @@ const Paragraph = styled.p`
   font-size: 16px;
   line-height: 22px;
   letter-spacing: 0.67px;
+  color: ${({theme}) => theme.colors.text};
 `;
 
 const CodeBlock = styled.div`
@@ -64,14 +64,18 @@ const CodeBlock = styled.div`
 
 const Code = styled.code`
   padding: 5px;
+  color: ${({theme}) => theme.colors.text};
+  background: ${({theme}) => theme.colors.codeblock};
 `;
 
 const BlockQuote = styled.blockquote`
   font-style: normal;
   font-size: 16px;
   min-height: 30px;
+  border-left: 4px solid ${({theme}) => theme.colors.text};
   padding-left: 8px;
- `;
+  color: ${({theme}) => theme.colors.text};
+`;
 
 const Triangle = styled.span`
   width: 0;
@@ -112,10 +116,10 @@ const Link = styled.a`
   }
   &:hover {
     text-decoration: underline;
-    
+    color: ${({theme}) => theme.colors.link};
   }
   text-decoration: underline;
-  
+  color: ${({theme}) => theme.colors.link};
 `;
 
 
@@ -147,7 +151,7 @@ const Element: React.FC<RenderElementProps> = ({
           {children}
           <LinkContainer>
             <Triangle />
-            <Rectangle >{element?.url}</Rectangle>
+            <Rectangle>{element?.url}</Rectangle>
           </LinkContainer>
         </Link>
       );

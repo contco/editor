@@ -1,14 +1,13 @@
-import React, { FC, SVGProps, ReactNode, MouseEvent } from "react";
+import React, { FC, SVGProps, ReactChild, ReactChildren, MouseEvent } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 
 
 //Button
 interface ButtonProps {
-  active: boolean;
+  active?: boolean;
   reversed?: boolean;
-  ref?: React.Ref<HTMLInputElement>;
-  children: ReactNode;
+  children: ReactChild | ReactChildren;
   onMouseDown?: (event: MouseEvent) => void;
 }
 
@@ -23,11 +22,11 @@ export const StyledButton = styled.span<ButtonProps>`
         ? "black"
         : "#ccc"};
 `;
-export const Button: (props: ButtonProps) => any = React.forwardRef(
-  ({ active, reversed, ...props }, ref) => (
-    <div>
-      <StyledButton ref={ref} active={active} reversed={reversed} {...props} />
-    </div>
+export const Button = React.forwardRef<HTMLSpanElement, ButtonProps>(
+  ({ active, reversed, onMouseDown, children }, ref) => (
+    <StyledButton active={active} reversed={reversed} onMouseDown={onMouseDown} ref={ref}>
+      {children}
+    </StyledButton>
   )
 );
 
@@ -35,7 +34,6 @@ export const Button: (props: ButtonProps) => any = React.forwardRef(
 interface IconProps {
   svg: FC<SVGProps<SVGSVGElement>>;
   color?: string;
-  ref?: React.RefObject<SVGSVGElement>;
 }
 export const StyledIcon = styled.svg`
   fill: ${(props) => props.color};
@@ -44,11 +42,9 @@ export const StyledIcon = styled.svg`
   }
 `;
 
-export const Icon: (props: IconProps) => any = React.forwardRef(
+export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ svg, color = "#ffffff" }, ref) => (
-    <div>
-      <StyledIcon as={svg} color={color} ref={ref} width="11px" height="14px" />
-    </div>
+    <StyledIcon as={svg} color={color} ref={ref} width="11px" height="14px" />
   )
 );
 
@@ -86,12 +82,8 @@ const StyledMenu = styled.div`
       margin-left: 15px;
     `;
 
-interface Props {
-   ref?: React.MutableRefObject<HTMLDivElement | null>;
-}
-
-export const Menu : React.RefForwardingComponent<HTMLDivElement, Props> = React.forwardRef<HTMLDivElement, Props>(
-  ({ ...props }, ref) => (
+export const Menu: any = React.forwardRef(
+  ({ ...props }, ref: React.Ref<HTMLDivElement>) => (
     <Container ref={ref}>
       <Triangle />
       <StyledMenu {...props} />

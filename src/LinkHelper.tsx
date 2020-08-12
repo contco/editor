@@ -1,9 +1,7 @@
 import React, { FC,SVGProps} from 'react'
-//import isUrl from 'is-url';
 const isUrl = require('is-url');
 import { useSlate } from 'slate-react'
 import { Transforms, Editor, Range} from 'slate'
-
 import { Button, Icon } from "./Helper";
 
 interface LinkButtonProps {
@@ -16,13 +14,15 @@ export const LinkButton: (props: LinkButtonProps) => JSX.Element = ({
   showInput
 }) => {
   const editor = useSlate();
+  const active = isLinkActive(editor) !== undefined ? true : false; 
   return (
     <Button
-      active={isLinkActive(editor)}
+      active={active}
       onMouseDown={event => {
         event.preventDefault();
         showInput();
       }}
+      reversed={false}
     >
       <Icon svg={icon} />
     </Button>
