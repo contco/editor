@@ -49,7 +49,7 @@ const Paragraph = styled.p`
   font-size: 16px;
   line-height: 22px;
   letter-spacing: 0.67px;
-  color: ${({theme}) => theme.colors.text};
+  color: #050b21;
 `;
 
 const CodeBlock = styled.div`
@@ -64,17 +64,17 @@ const CodeBlock = styled.div`
 
 const Code = styled.code`
   padding: 5px;
-  color: ${({theme}) => theme.colors.text};
-  background: ${({theme}) => theme.colors.codeblock};
+  color: #050b21;
+  background: #050b210d;
 `;
 
 const BlockQuote = styled.blockquote`
   font-style: normal;
   font-size: 16px;
   min-height: 30px;
-  border-left: 4px solid ${({theme}) => theme.colors.text};
+  border-left: 4px solid #000;
   padding-left: 8px;
-  color: ${({theme}) => theme.colors.text};
+  color: #050b21;
 `;
 
 const Triangle = styled.span`
@@ -116,10 +116,10 @@ const Link = styled.a`
   }
   &:hover {
     text-decoration: underline;
-    color: ${({theme}) => theme.colors.link};
+    color: #050b21;
   }
   text-decoration: underline;
-  color: ${({theme}) => theme.colors.link};
+  color: #050b21;
 `;
 
 

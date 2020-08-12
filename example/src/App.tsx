@@ -10,7 +10,7 @@ const App = () => {
     setDocument(content);
   };
   return (
-    <Editor data={document} setContent={setContent} readOnly={true} />
+    <Editor data={document} setContent={setContent} readOnly={false} />
 
   )
 }
