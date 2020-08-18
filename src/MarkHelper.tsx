@@ -31,8 +31,7 @@ interface MarkButtonProps {
 
   //Toggle Mark
 export const ToggleMark = (editor: ReactEditor, format: string) => {
-    console.log("editor", editor);
-    console.log("format", format);
+    
     const isActive = isMarkActive(editor, format);
     if (isActive) {
       Editor.removeMark(editor, format);
