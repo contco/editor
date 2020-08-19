@@ -37,7 +37,7 @@ export const ToggleBlock = (editor: ReactEditor, format: string) => {
 };
 //is Block Active
 const isBlockActive = (editor: ReactEditor, format: string) => {
-  const [match] = Editor.nodes(editor, {
+  const [match]: any = Editor.nodes(editor, {
     match: (n) => n.type === format,
   });
   return !!match;

@@ -55,7 +55,7 @@ export const withLinks = (editor: any) => {
   return editor;
 };
 const isLinkActive = (editor: any) => {
-  const [link] = Editor.nodes(editor, { match: (n) => n.type === "link" });
+  const [link] : any = Editor.nodes(editor, { match: (n) => n.type === "link" });
   return !!link;
 };
 

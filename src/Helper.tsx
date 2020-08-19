@@ -91,11 +91,20 @@ export const Menu: any = React.forwardRef(
   )
 );
 
-export const Portal = ({ children }: any) => {
+interface PortalProps {
+  children: React.ReactNode
+}
+export const Portal : React.SFC<PortalProps> = ({ children }: PortalProps) =>{
   let container;
   if (typeof window !== "undefined") {
     const rootContainer = document.createElement("div");
-    const parentElem = document.querySelector("#__next");
+    const parentElemNext = document.querySelector("#__next");
+    const parentElemReact = document.getElementById("root");
+    let parentElem: any;
+    
+    if(parentElemNext !== null) parentElem = parentElemNext;
+    else parentElem = parentElemReact;
+    
     parentElem?.appendChild(rootContainer);
     container = rootContainer;
   }

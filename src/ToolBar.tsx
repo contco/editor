@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, createRef } from "react";
+import React, { useRef, useEffect, useState, createRef, Fragment } from "react";
 import { ReactEditor, useSlate } from "slate-react";
 import { Editor } from "slate";
 import { Menu, Portal } from "./Helper";
@@ -99,6 +99,7 @@ const ToolBar: React.FC<ToolBarProps> = () => {
   }
   if (isInput) {
     return (
+      <Fragment>
       <Portal>
         <Menu ref={inputMenuRef}>
           <div>
@@ -106,9 +107,11 @@ const ToolBar: React.FC<ToolBarProps> = () => {
           </div>
         </Menu>
       </Portal>
+      </Fragment>
     );
   }
   return (
+    <Fragment>
     <Portal>
       <Menu ref={ref}>
         <MarkButton format="bold" icon={Bold} />
@@ -121,6 +124,7 @@ const ToolBar: React.FC<ToolBarProps> = () => {
         <MarkButton format="code" icon={Coding} />
       </Menu>
     </Portal>
+    </Fragment>
   );
 };
 const Input = styled.input`
