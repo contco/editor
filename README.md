@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save editor
+ npm install @contco/editor@1.0.0
 ```
 
 ## Usage
