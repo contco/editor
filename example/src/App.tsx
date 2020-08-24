@@ -1,7 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
-import  Editor  from 'editor'
-import 'editor/dist/index.css'
+import Editor from 'editor'
 
 const App = () => {
   const [document, setDocument] = useState<any>(initialValue);

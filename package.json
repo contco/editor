@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Rich Text Editor",
   "author": "contco",
-  "license": "none",
+  "license": "UNLICENSED",
   "repository": "contco/editor",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
