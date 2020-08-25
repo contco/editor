@@ -8,14 +8,14 @@ import { LinkButton, insertLink } from "./LinkHelper";
 import { Range } from "slate";
 import styled from "styled-components";
 //icons
-import {ReactComponent as Bold }from "../assets/bold.svg";
-import {ReactComponent as Coding} from "../assets/coding.svg";
-import {ReactComponent as Italic} from "../assets/italic.svg";
-import {ReactComponent as Link} from "../assets/link.svg";
-import {ReactComponent as Quote} from "../assets/quote.svg";
-import {ReactComponent as Underline} from "../assets/underline.svg";
-import {ReactComponent as H1} from "../assets/h1.svg";
-import {ReactComponent as H2} from "../assets/h2.svg";
+import { ReactComponent as Bold } from "./assets/bold.svg";
+import { ReactComponent as Coding } from "./assets/coding.svg";
+import { ReactComponent as Italic } from "./assets/italic.svg";
+import { ReactComponent as Link } from "./assets/link.svg";
+import { ReactComponent as Quote } from "./assets/quote.svg";
+import { ReactComponent as Underline } from "./assets/underline.svg";
+import { ReactComponent as H1 } from "./assets/h1.svg";
+import { ReactComponent as H2 } from "./assets/h2.svg";
 
 export interface ToolBarProps { }
 
