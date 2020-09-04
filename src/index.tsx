@@ -49,7 +49,7 @@ const Paragraph = styled.p`
   font-size: 16px;
   line-height: 22px;
   letter-spacing: 0.67px;
-  color: #050b21;
+  color: ${({theme}) => theme.colors != undefined?  theme.colors.text : '#050b21'};
 `;
 
 const CodeBlock = styled.div`
@@ -64,17 +64,17 @@ const CodeBlock = styled.div`
 
 const Code = styled.code`
   padding: 5px;
-  color: #050b21;
-  background: #050b210d;
+  color: ${({theme}) => theme.colors != undefined? theme.colors.text : "#050b21"};
+  background: ${({theme}) => theme.colors != undefined? theme.colors.codeblock : "#050b210d"};
 `;
 
 const BlockQuote = styled.blockquote`
   font-style: normal;
   font-size: 16px;
   min-height: 30px;
-  border-left: 4px solid #000;
+  border-left: 4px solid ${({theme}) => theme.colors != undefined? theme.colors.text : "#000"};
   padding-left: 8px;
-  color: #050b21;
+  color: ${({theme}) => theme.colors != undefined? theme.colors.text : "#050b21"};
 `;
 
 const Triangle = styled.span`
@@ -116,10 +116,10 @@ const Link = styled.a`
   }
   &:hover {
     text-decoration: underline;
-    color: #050b21;
+    color: ${({theme}) => theme.colors != undefined? theme.colors.link : "#050b21"};
   }
   text-decoration: underline;
-  color: #050b21;
+  color: ${({theme}) => theme.colors != undefined? theme.colors.link : "#050b21"};
 `;
 
 
