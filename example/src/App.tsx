@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import  Editor  from 'editor'
 // import 'editor/dist/index.css'
 
@@ -10,8 +9,7 @@ const App = () => {
     setDocument(content);
   };
   return (
-    <Editor data={document} setContent={setContent} readOnly={false} />
-
+      <Editor data={document} setContent={setContent} readOnly={false} />
   )
 }
 
