@@ -1,22 +1,29 @@
-import React, {  } from 'react'
-// import  Editor  from 'editor'
+import React, { useState } from 'react'
+import  Editor  from 'editor'
 // // import 'editor/dist/index.css'
 import Serialize from "./Serialize";
+import Deseialize from "./Deserialize";
 
 const App = () => {
-  // const [document, setDocument] = useState<any>(initialValue);
+   const [document, setDocument] = useState<any>("");
 
-  // const setContent = (content: any) => {
-  //   setDocument(content);
-  // };
+    const setContent = (content: any) => {
+      setDocument(content);
+    };
   const handleSerialize = () =>{
      const s =  Serialize(initialValue);
      console.log(s);
 
+     const doc = new DOMParser().parseFromString(s, 'text/html')
+     const d =  Deseialize(doc.body)
+
+
+    console.log(d);
+    setDocument(d);
   }
   return (
     <>
-     {/* <Editor data={document} setContent={setContent} readOnly={false} /> */}
+    {document !="" ?<Editor data={document} setContent={setContent} readOnly={false} /> : ""}
       <button onClick={handleSerialize}>serialize</button>
   </>
   )
