@@ -1,19 +1,29 @@
-import React, { useState } from 'react'
-import  Editor  from 'editor'
-// import 'editor/dist/index.css'
+import React, {  } from 'react'
+// import  Editor  from 'editor'
+// // import 'editor/dist/index.css'
+import Serialize from "./Serialize";
 
 const App = () => {
-  const [document, setDocument] = useState<any>(initialValue);
+  // const [document, setDocument] = useState<any>(initialValue);
 
-  const setContent = (content: any) => {
-    setDocument(content);
-  };
+  // const setContent = (content: any) => {
+  //   setDocument(content);
+  // };
+  const handleSerialize = () =>{
+     const s =  Serialize(initialValue);
+     console.log(s);
+
+  }
   return (
-      <Editor data={document} setContent={setContent} readOnly={false} />
+    <>
+     {/* <Editor data={document} setContent={setContent} readOnly={false} /> */}
+      <button onClick={handleSerialize}>serialize</button>
+  </>
   )
 }
 
-const initialValue = [
+const initialValue = {
+  children: [
   {
     type: 'paragraph',
     children: [
@@ -48,6 +58,7 @@ const initialValue = [
     type: 'paragraph',
     children: [{ text: 'Try it out for yourself!' }],
   },
-]
+],
+}
 
 export default App
