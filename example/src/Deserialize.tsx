@@ -15,7 +15,7 @@ const deserialize = (el:any) => {
     case 'BR':
       return '\n'
     case 'BLOCKQUOTE':
-      return jsx('element', { type: 'quote' }, children)
+      return jsx('element', { type: 'block-quote' }, children)
     case 'P':
       return jsx('element', { type: 'paragraph' }, children)
     case 'A':

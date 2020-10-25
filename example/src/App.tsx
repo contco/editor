@@ -5,25 +5,37 @@ import Serialize from "./Serialize";
 import Deseialize from "./Deserialize";
 
 const App = () => {
+   const [document1, setDocument1] = useState<any>(initialValue.children);
    const [document, setDocument] = useState<any>("");
+   const [s, setS] = useState<any>("");
+
+    const setContent1 = (content: any) => {
+      setDocument1(content);
+    };
 
     const setContent = (content: any) => {
       setDocument(content);
     };
   const handleSerialize = () =>{
-     const s =  Serialize(initialValue);
-     console.log(s);
+    console.log("original editor content---->",document1);
 
+     const s =  Serialize(initialValue);
+     console.log("Serialize---->",s);
+     setS(s);
      const doc = new DOMParser().parseFromString(s, 'text/html')
      const d =  Deseialize(doc.body)
-
-
     console.log(d);
     setDocument(d);
   }
   return (
     <>
-    {document !="" ?<Editor data={document} setContent={setContent} readOnly={false} /> : ""}
+      <h1>editor original content</h1>
+      <Editor data={document1} setContent={setContent1} readOnly={false} />
+      <h1>serialized html</h1>
+      <div dangerouslySetInnerHTML={{ __html: s }} 
+      />
+      <h1>deserialized html to editor content</h1>
+    {document !=="" ?<Editor data={document} setContent={setContent} readOnly={false} /> : ""}
       <button onClick={handleSerialize}>serialize</button>
   </>
   )
@@ -39,7 +51,7 @@ const initialValue = {
       { text: ' text, ' },
       { text: 'much', italic: true },
       { text: ' better than a ' },
-      { text: '<textarea>', code: true },
+      { text: 'Hello World', code: true },
       { text: '!' },
     ],
   },
@@ -56,6 +68,11 @@ const initialValue = {
           ', or add a semantically rendered block quote in the middle of the page, like this:',
       },
     ],
+  },
+  {
+    type: 'link',
+    url: 'https://en.wikipedia.org/wiki/Hypertext',
+    children: [{ text: 'hyperlinks' }],
   },
   {
     type: 'block-quote',
