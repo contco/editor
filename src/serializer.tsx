@@ -1,14 +1,11 @@
 import escapeHtml from 'escape-html'
 import { Text } from 'slate'
 
-const serialize = (node:any) => {
+const serializer = (node:any) => {
   if (Text.isText(node)) {
-    // return escapeHtml(node.text)
     return serializeLeaf(node, node.text);
-
   }
-  const children = node.children.map((n:any) => serialize(n)).join('')
-  
+  const children = node.children.map((n:any) => serializer(n)).join('');
   return serializeElement(node, children);
 }
 
@@ -19,6 +16,18 @@ function serializeElement(element:any, children:any) {
       return `<p>${children}</p>`
     case 'block-quote':
       return `<blockquote>${children}</blockquote>`
+    case "code-block":
+      return `<codeblock>${children} </codeblock>`;
+    case "heading-one":
+      return `<h1>${children}</h1>`;
+    case "heading-two":
+      return `<h2>${children}</h2>`;
+    case "list-item":
+      return `<li>${children}</li>`;
+    case "numbered-list":
+      return `<ol>${children}</ol>`;
+    case "bulleted-list":
+      return `<ul>${children}</ul>`;
     case 'link':
       return `<a href="${escapeHtml(element.url)}" target="_blank">${children}</a>`
     default:
@@ -42,4 +51,5 @@ function serializeLeaf(leaf:any, children:any) {
   }
   return `<span>${children}</span>`
 }
-export default serialize;
+
+export default serializer;
