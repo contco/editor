@@ -1,6 +1,5 @@
 import { jsx } from 'slate-hyperscript';
 
-//deserialize elements
 const ELEMENT_TAGS: { [key: string]: (el: any) => any } = {
     A: (el) => ({
         type: 'link',
@@ -17,7 +16,6 @@ const ELEMENT_TAGS: { [key: string]: (el: any) => any } = {
     UL: () => ({ type: 'bulleted-list' }),
 };
 
-//deserialize leaf nodes
 const TEXT_TAGS: { [key: string]: (el: any) => any } = {
     CODE: () => ({ code: true }),
     EM: () => ({ italic: true }),
@@ -49,12 +47,12 @@ const deserializer = (el: any): any => {
     if (el.nodeName === 'BODY') {
         return jsx('fragment', {}, children);
     }
-
+    //serialize elements
     if (ELEMENT_TAGS[nodeName]) {
         const attrs = ELEMENT_TAGS[nodeName](el);
         return jsx('element', attrs, children);
     }
-
+    //deserialize leaf nodes
     if (TEXT_TAGS[nodeName]) {
         const attrs = TEXT_TAGS[nodeName](el);
         return children.map((child) => jsx('text', attrs, child));

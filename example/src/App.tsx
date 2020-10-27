@@ -14,14 +14,10 @@ const App = () => {
       setDocument(content);
     };
   const handleSerialize = () =>{
-    console.log("original editor content---->",document1);
-
      const s =  serializer(initialValue);
-     console.log("Serialize---->",s);
      setS(s);
      const doc = new DOMParser().parseFromString(s, 'text/html')
      const d =  deserializer(doc.body)
-    console.log(d);
     setDocument(d);
   }
   return (
