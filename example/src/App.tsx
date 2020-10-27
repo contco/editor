@@ -1,19 +1,49 @@
 import React, { useState } from 'react'
-import  Editor  from 'editor'
-// import 'editor/dist/index.css'
+import  { Editor , serializer , deserializer }  from "editor";
 
 const App = () => {
-  const [document, setDocument] = useState<any>(initialValue);
+   const [document1, setDocument1] = useState<any>(initialValue.children);
+   const [document, setDocument] = useState<any>("");
+   const [s, setS] = useState<any>("");
 
-  const setContent = (content: any) => {
-    setDocument(content);
-  };
+    const setContent1 = (content: any) => {
+      setDocument1(content);
+    };
+
+    const setContent = (content: any) => {
+      setDocument(content);
+    };
+  const handleSerialize = () =>{
+     const s =  serializer(initialValue);
+     setS(s);
+     const doc = new DOMParser().parseFromString(s, 'text/html')
+     const d =  deserializer(doc.body)
+    setDocument(d);
+  }
   return (
-      <Editor data={document} setContent={setContent} readOnly={false} />
+    <>
+      <h1 style={{background:'yellow'}}>Editor original content</h1>
+      <Editor data={document1} setContent={setContent1} readOnly={false} />
+      <h1 style={{background:'yellow'}}>Serialized HTML</h1>
+      <div dangerouslySetInnerHTML={{ __html: s }} 
+      />
+      <h1 style={{background:'yellow'}}>Deserialized HTML to editor content</h1>
+    {document !=="" ?<Editor data={document} setContent={setContent} readOnly={false} /> : ""}
+      <button onClick={handleSerialize}>serialize</button>
+  </>
   )
 }
 
-const initialValue = [
+const initialValue = {
+  children: [
+  {
+    type: 'heading-one',
+    children: [{ text: "Heading 1" }],
+  },
+  {
+    type: 'heading-two',
+    children: [{ text: "Heading 2" }],
+  },
   {
     type: 'paragraph',
     children: [
@@ -22,7 +52,7 @@ const initialValue = [
       { text: ' text, ' },
       { text: 'much', italic: true },
       { text: ' better than a ' },
-      { text: '<textarea>', code: true },
+      { text: 'Hello World', code: true },
       { text: '!' },
     ],
   },
@@ -41,6 +71,11 @@ const initialValue = [
     ],
   },
   {
+    type: 'link',
+    url: 'https://en.wikipedia.org/wiki/Hypertext',
+    children: [{ text: 'hyperlinks' }],
+  },
+  {
     type: 'block-quote',
     children: [{ text: 'A wise quote.' }],
   },
@@ -48,6 +83,7 @@ const initialValue = [
     type: 'paragraph',
     children: [{ text: 'Try it out for yourself!' }],
   },
-]
+],
+}
 
 export default App
