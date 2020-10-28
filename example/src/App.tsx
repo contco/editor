@@ -15,8 +15,10 @@ const App = () => {
     };
   const handleSerialize = () =>{
      const s =  serializer(initialValue);
+     console.log(s)
      setS(s);
      const doc = new DOMParser().parseFromString(s, 'text/html')
+     
      const d =  deserializer(doc.body)
     setDocument(d);
   }
@@ -66,15 +68,16 @@ const initialValue = {
       { text: 'bold', bold: true },
       {
         text:
-          ', or add a semantically rendered block quote in the middle of the page, like this:',
+          ', or add a semantically rendered block quote in the middle of the page, like this: ',
       },
+      {  
+        type: 'link',
+        url: 'https://en.wikipedia.org/wiki/Hypertext',
+        children: [{ text: 'hyperlinks' }],
+      }
     ],
   },
-  {
-    type: 'link',
-    url: 'https://en.wikipedia.org/wiki/Hypertext',
-    children: [{ text: 'hyperlinks' }],
-  },
+ 
   {
     type: 'block-quote',
     children: [{ text: 'A wise quote.' }],
