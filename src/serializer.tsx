@@ -46,7 +46,7 @@ function serializeLeaf(leaf:any, children:any) {
   if (leaf.italic) {
     children = `<em>${children}</em>`
   }
-  if (leaf.underline) {
+  if (leaf.underlined) {
     children = `<u>${children}</u>`
   }
   return `<span>${children}</span>`

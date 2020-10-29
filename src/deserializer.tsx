@@ -20,7 +20,7 @@ const TEXT_TAGS: { [key: string]: (el: any) => any } = {
     CODE: () => ({ code: true }),
     EM: () => ({ italic: true }),
     STRONG: () => ({ bold: true }),
-    U: () => ({ underline: true }),
+    U: () => ({ underlined: true }),
 };
 
 const deserializer = (el: any): any => {
