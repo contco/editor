@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import  { Editor , serializer , deserializer }  from "editor";
+import  { Editor , serializeHTML , deserializeHTML }  from "editor";
 
 const App = () => {
    const [document1, setDocument1] = useState<any>(initialValue.children);
@@ -14,16 +14,17 @@ const App = () => {
       setDocument(content);
     };
   const handleSerialize = () =>{
-     const s =  serializer(initialValue);
+     const s =  serializeHTML(initialValue);
      console.log(s)
      setS(s);
      const doc = new DOMParser().parseFromString(s, 'text/html')
      
-     const d =  deserializer(doc.body)
+     const d =  deserializeHTML(doc.body)
     setDocument(d);
   }
   return (
     <>
+    {/* <Element  {...initialValue}/> */}
       <h1 style={{background:'yellow'}}>Editor original content</h1>
       <Editor data={document1} setContent={setContent1} readOnly={false} />
       <h1 style={{background:'yellow'}}>Serialized HTML</h1>

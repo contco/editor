@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, ReactNode} from "react";
+import React, { useCallback, useMemo, ReactNode, Fragment} from "react";
 import { createEditor } from "slate";
 import {
   Slate,
@@ -27,6 +27,9 @@ const Editor: (props: Props) => any = ({ data, setContent, readOnly }) => {
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
   return (
+    <Fragment>
+      {console.log(renderElement)}
+
     <Slate
       editor={editor}
       value={data}
@@ -40,6 +43,8 @@ const Editor: (props: Props) => any = ({ data, setContent, readOnly }) => {
 
       />
     </Slate>
+    </Fragment>
+
   );
 };
 
