@@ -6,9 +6,10 @@ import {
   withReact,
 } from "slate-react";
 
-import ToolBar from "./ToolBar";
-import { withLinks } from "./LinkHelper";
-import {Element, Leaf} from './plugins/Mark';
+import { ToolBar } from "./ToolBar";
+import { withLinks } from "./Helpers/LinkHelper";
+import {Element } from './plugins/Element';
+import {Leaf} from './plugins/Leaf';
 import { withHistory } from 'slate-history'
 
 
@@ -21,15 +22,13 @@ interface Props {
   children?: ReactNode;
   element?: any;
 }
-const Editor: (props: Props) => any = ({ data, setContent, readOnly }) => {
+const Editor: (props: Props) => any = ({ data, setContent, readOnly = false }) => {
   const editor = useMemo(() => withLinks(withHistory(withReact(createEditor()))), []);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
   return (
     <Fragment>
-      {console.log(renderElement)}
-
     <Slate
       editor={editor}
       value={data}
@@ -39,8 +38,8 @@ const Editor: (props: Props) => any = ({ data, setContent, readOnly }) => {
       <Editable
         renderElement={renderElement}
         renderLeaf={renderLeaf}
-        readOnly={readOnly ? true : false}
-
+        readOnly={readOnly}
+  
       />
     </Slate>
     </Fragment>

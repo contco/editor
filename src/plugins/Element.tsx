@@ -1,6 +1,6 @@
 import * as React from "react";
-import {RenderElementProps, RenderLeafProps } from "slate-react";
-import { Paragraph, CodeBlock, BlockQuote, Link, LinkContainer, Triangle, Rectangle, Code } from './MarkStyle';
+import {RenderElementProps } from "slate-react";
+import { Paragraph, CodeBlock, BlockQuote, Link, LinkContainer, Triangle, Rectangle } from './ElementStyle';
 
 export const Element: React.FC<RenderElementProps> = ({
   attributes,
@@ -39,20 +39,3 @@ export const Element: React.FC<RenderElementProps> = ({
   }
 };
 
-export const Leaf: React.FC<RenderLeafProps> = ({ attributes, children, leaf }) => {
-    if (leaf.bold) {
-        children = <strong>{children}</strong>;
-    }
-
-    if (leaf.code) {
-        children = <Code>{children}</Code>;
-    }
-
-    if (leaf.italic) {
-        children = <em>{children}</em>;
-    }
-    if (leaf.underlined) {
-        children = <u>{children}</u>;
-    }
-    return <span {...attributes}>{children}</span>;
-};

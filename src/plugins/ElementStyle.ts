@@ -17,11 +17,6 @@ export const CodeBlock = styled.div`
   padding-right: 50px;
 `;
 
-export const Code = styled.code`
-  padding: 5px;
-  color: ${({theme}) => theme.colors != undefined? theme.colors.text : "#050b21"};
-  background: ${({theme}) => theme.colors != undefined? theme.colors.codeblock : "#050b210d"};
-`;
 
 export const BlockQuote = styled.blockquote`
   font-style: normal;
