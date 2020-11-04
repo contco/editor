@@ -1,39 +1,15 @@
 import React, { useState } from 'react'
-import  { Editor , serializeHTML , deserializeHTML }  from "editor";
+import  { Editor }  from "editor";
 
 const App = () => {
    const [document1, setDocument1] = useState<any>(initialValue.children);
-   const [document, setDocument] = useState<any>("");
-   const [s, setS] = useState<any>("");
-
+  
     const setContent1 = (content: any) => {
       setDocument1(content);
     };
 
-    const setContent = (content: any) => {
-      setDocument(content);
-    };
-  const handleSerialize = () =>{
-     const s =  serializeHTML(initialValue);
-     console.log(s)
-     setS(s);
-     const doc = new DOMParser().parseFromString(s, 'text/html')
-     
-     const d =  deserializeHTML(doc.body)
-    setDocument(d);
-  }
   return (
-    <>
-    {/* <Element  {...initialValue}/> */}
-      <h1 style={{background:'yellow'}}>Editor original content</h1>
-      <Editor data={document1} setContent={setContent1} readOnly={false} />
-      <h1 style={{background:'yellow'}}>Serialized HTML</h1>
-      <div dangerouslySetInnerHTML={{ __html: s }} 
-      />
-      <h1 style={{background:'yellow'}}>Deserialized HTML to editor content</h1>
-    {document !=="" ?<Editor data={document} setContent={setContent} readOnly={false} /> : ""}
-      <button onClick={handleSerialize}>serialize</button>
-  </>
+      <Editor data={document1} setContent={setContent1} />
   )
 }
 
