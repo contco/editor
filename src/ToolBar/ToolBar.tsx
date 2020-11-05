@@ -1,25 +1,25 @@
 import React, { useRef, useEffect, useState, createRef, Fragment } from "react";
 import { ReactEditor, useSlate } from "slate-react";
 import { Editor } from "slate";
-import { Menu, Portal } from "./Helper";
-import { BlockButton } from "./BlockHelper";
-import { MarkButton } from "./MarkHelper";
-import { LinkButton, insertLink } from "./LinkHelper";
+import { Menu, Portal, LinkInput} from "../Helpers/Helper";
+import { BlockButton } from "../Helpers/BlockHelper";
+import { MarkButton } from "../Helpers/MarkHelper";
+import { LinkButton, insertLink } from "../Helpers/LinkHelper";
 import { Range } from "slate";
-import styled from "styled-components";
+
 //icons
-import { ReactComponent as Bold } from "./assets/bold.svg";
-import { ReactComponent as Coding } from "./assets/coding.svg";
-import { ReactComponent as Italic } from "./assets/italic.svg";
-import { ReactComponent as Link } from "./assets/link.svg";
-import { ReactComponent as Quote } from "./assets/quote.svg";
-import { ReactComponent as Underline } from "./assets/underline.svg";
-import { ReactComponent as H1 } from "./assets/h1.svg";
-import { ReactComponent as H2 } from "./assets/h2.svg";
+import { ReactComponent as Bold } from "../assets/bold.svg";
+import { ReactComponent as Coding } from "../assets/coding.svg";
+import { ReactComponent as Italic } from "../assets/italic.svg";
+import { ReactComponent as Link } from "../assets/link.svg";
+import { ReactComponent as Quote } from "../assets/quote.svg";
+import { ReactComponent as Underline } from "../assets/underline.svg";
+import { ReactComponent as H1 } from "../assets/h1.svg";
+import { ReactComponent as H2 } from "../assets/h2.svg";
 
 export interface ToolBarProps { }
 
-const ToolBar: React.FC<ToolBarProps> = () => {
+export const ToolBar: React.FC<ToolBarProps> = () => {
 
   const [isInput, setIsInput] = useState<boolean>(false);
   const [inputToolbarPosition, setInputToolbarPosition] = useState<any>({});
@@ -103,7 +103,7 @@ const ToolBar: React.FC<ToolBarProps> = () => {
       <Portal>
         <Menu ref={inputMenuRef}>
           <div>
-            <Input onBlur={() => setIsInput(false)} autoFocus ref={inputContainerRef} type="text" onKeyPress={(e) => handleInput(e)} />
+            <LinkInput onBlur={() => setIsInput(false)} autoFocus ref={inputContainerRef} type="text" onKeyPress={(e) => handleInput(e)} />
           </div>
         </Menu>
       </Portal>
@@ -127,13 +127,3 @@ const ToolBar: React.FC<ToolBarProps> = () => {
     </Fragment>
   );
 };
-const Input = styled.input`
-    border: none;
-    background: #050b21;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    padding:6px
-    font-size:16px
-`;
-
-export default ToolBar;

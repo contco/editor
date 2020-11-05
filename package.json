@@ -1,6 +1,6 @@
 {
   "name": "@contco/editor",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Rich Text Editor",
   "author": "Hamzaalam",
   "publishConfig": {
@@ -67,10 +67,12 @@
     "dist"
   ],
   "dependencies": {
+    "@types/escape-html": "^1.0.0",
     "@types/styled-components": "^5.1.2",
     "is-url": "^1.2.4",
     "slate": "^0.58.4",
     "slate-history": "^0.58.4",
+    "slate-hyperscript": "^0.59.0",
     "slate-react": "^0.58.4",
     "styled-components": "^5.1.1"
   }

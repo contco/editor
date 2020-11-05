@@ -1,3 +1,7 @@
-export { default as Editor } from './Editor';
-export { default as serializer }  from './serializer';
-export { default as deserializer }  from './deserializer';
+export {default as Editor} from './Editor';
+export * from './plugins';
+export { serializeHTML } from './serializers';
+export { deserializeHTML } from './deserializers';
+
+
+

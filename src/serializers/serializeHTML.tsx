@@ -1,11 +1,11 @@
 import escapeHtml from 'escape-html'
 import { Text } from 'slate'
 
-const serializer = (node:any) => {
+export const serializeHTML = (node:any) => {
   if (Text.isText(node)) {
     return serializeLeaf(node, node.text);
   }
-  const children = node.children.map((n:any) => serializer(n)).join('');
+  const children = node.children.map((n:any) => serializeHTML(n)).join('');
   return serializeElement(node, children);
 }
 
@@ -46,10 +46,8 @@ function serializeLeaf(leaf:any, children:any) {
   if (leaf.italic) {
     children = `<em>${children}</em>`
   }
-  if (leaf.underline) {
+  if (leaf.underlined) {
     children = `<u>${children}</u>`
   }
   return `<span>${children}</span>`
 }
-
-export default serializer;

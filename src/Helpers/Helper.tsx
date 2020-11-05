@@ -1,27 +1,16 @@
 import React, { FC, SVGProps, ReactChild, ReactChildren, MouseEvent } from "react";
 import ReactDOM from "react-dom";
-import styled from "styled-components";
+import { StyledButton, StyledIcon, Container, Triangle, StyledMenu } from './HelperStyle'
 
 
 //Button
-interface ButtonProps {
+export interface ButtonProps {
   active?: boolean;
   reversed?: boolean;
   children: ReactChild | ReactChildren;
   onMouseDown?: (event: MouseEvent) => void;
 }
 
-export const StyledButton = styled.span<ButtonProps>`
-  cursor: pointer;
-  color: ${(props) =>
-    props.reversed
-      ? props.active
-        ? "white"
-        : "#aaa"
-      : props.active
-        ? "black"
-        : "#ccc"};
-`;
 export const Button = React.forwardRef<HTMLSpanElement, ButtonProps>(
   ({ active, reversed, onMouseDown, children }, ref) => (
     <StyledButton active={active} reversed={reversed} onMouseDown={onMouseDown} ref={ref}>
@@ -35,12 +24,6 @@ interface IconProps {
   svg: FC<SVGProps<SVGSVGElement>>;
   color?: string;
 }
-export const StyledIcon = styled.svg`
-  fill: ${(props) => props.color};
-  & use {
-    fill: ${(props) => props.color};
-  }
-`;
 
 export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
   ({ svg, color = "#ffffff" }, ref) => (
@@ -48,40 +31,8 @@ export const Icon = React.forwardRef<SVGSVGElement, IconProps>(
   )
 );
 
-//Menu
-const Container = styled.div`
-  padding: 8px 7px 6px;
-  position: absolute;
-  z-index: 1;
-  top: -10000px;
-  left: -10000px;
-  opacity: 0;
-  background-color: #050b21;
-  border-radius: 3px;
-  transition: opacity 0.75s;
-  & > * {
-    display: inline-block;
-  }
-`;
-export const Triangle = styled.div`
-  position: absolute;
-  top: auto;
-  bottom: 100%;
-  left: 44%;
-  border: solid 8px;
-  border-color: transparent transparent #050b21 transparent;
-  margin: 0 auto;
-`;
-const StyledMenu = styled.div`
-    border-radius: 3px;
-    transition: opacity 0.75s;
-    & > * {
-      display: inline-block;
-    }
-    & > * + * {
-      margin-left: 15px;
-    `;
 
+//Menu
 export const Menu: any = React.forwardRef(
   ({ ...props }, ref: React.Ref<HTMLDivElement>) => (
     <Container ref={ref}>
@@ -110,3 +61,6 @@ export const Portal : React.SFC<PortalProps> = ({ children }: PortalProps) =>{
   }
   return container ? ReactDOM.createPortal(children, container) : null;
 };
+
+//Link Input
+export { LinkInput } from './HelperStyle';

@@ -1,36 +1,15 @@
 import React, { useState } from 'react'
-import  { Editor , serializer , deserializer }  from "editor";
+import  { Editor }  from "editor";
 
 const App = () => {
    const [document1, setDocument1] = useState<any>(initialValue.children);
-   const [document, setDocument] = useState<any>("");
-   const [s, setS] = useState<any>("");
-
+  
     const setContent1 = (content: any) => {
       setDocument1(content);
     };
 
-    const setContent = (content: any) => {
-      setDocument(content);
-    };
-  const handleSerialize = () =>{
-     const s =  serializer(initialValue);
-     setS(s);
-     const doc = new DOMParser().parseFromString(s, 'text/html')
-     const d =  deserializer(doc.body)
-    setDocument(d);
-  }
   return (
-    <>
-      <h1 style={{background:'yellow'}}>Editor original content</h1>
-      <Editor data={document1} setContent={setContent1} readOnly={false} />
-      <h1 style={{background:'yellow'}}>Serialized HTML</h1>
-      <div dangerouslySetInnerHTML={{ __html: s }} 
-      />
-      <h1 style={{background:'yellow'}}>Deserialized HTML to editor content</h1>
-    {document !=="" ?<Editor data={document} setContent={setContent} readOnly={false} /> : ""}
-      <button onClick={handleSerialize}>serialize</button>
-  </>
+      <Editor data={document1} setContent={setContent1} />
   )
 }
 
@@ -66,15 +45,16 @@ const initialValue = {
       { text: 'bold', bold: true },
       {
         text:
-          ', or add a semantically rendered block quote in the middle of the page, like this:',
+          ', or add a semantically rendered block quote in the middle of the page, like this: ',
       },
+      {  
+        type: 'link',
+        url: 'https://en.wikipedia.org/wiki/Hypertext',
+        children: [{ text: 'hyperlinks' }],
+      }
     ],
   },
-  {
-    type: 'link',
-    url: 'https://en.wikipedia.org/wiki/Hypertext',
-    children: [{ text: 'hyperlinks' }],
-  },
+ 
   {
     type: 'block-quote',
     children: [{ text: 'A wise quote.' }],

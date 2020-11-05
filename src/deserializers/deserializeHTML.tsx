@@ -20,10 +20,10 @@ const TEXT_TAGS: { [key: string]: (el: any) => any } = {
     CODE: () => ({ code: true }),
     EM: () => ({ italic: true }),
     STRONG: () => ({ bold: true }),
-    U: () => ({ underline: true }),
+    U: () => ({ underlined: true }),
 };
 
-const deserializer = (el: any): any => {
+export const deserializeHTML = (el: any): any => {
     if (el.nodeType === 3) {
         return el.textContent;
     } else if (el.nodeType !== 1) {
@@ -42,7 +42,7 @@ const deserializer = (el: any): any => {
     ) {
         parent = el.childNodes[0];
     }
-    const children = Array.from(parent.childNodes).map(deserializer).flat();
+    const children = Array.from(parent.childNodes).map(deserializeHTML).flat();
 
     if (el.nodeName === 'BODY') {
         return jsx('fragment', {}, children);
@@ -60,5 +60,3 @@ const deserializer = (el: any): any => {
 
     return children;
 };
-
-export default deserializer;
