@@ -1,42 +1,68 @@
-import escapeHtml from 'escape-html'
-import { Text } from 'slate'
 
-export const serializeHTML = (node:any) => {
-  if (Text.isText(node)) {
-    // return serializeLeaf(node, node.text);
-    return escapeHtml(node.text)
+
+export const serializeHTML = (slateNodesList:any) => {
+
+  const serializedBlocks = slateNodesList.map((node: any) => {
+    switch(node.type) {
+      case "paragraph":
+        return serializeParagraph(node, "text");
+      case "block-quote":
+        return serializeParagraph(node, "block-quote");
+      case "heading-one":
+      case "heading-two":
+        return serializeHeading(node, node.type);
+      default:
+      return serializeParagraph(node, "text");
+    }
+  });
+  return serializedBlocks;
 
   }
-  const children = node.children.map((n:any) => serializeHTML(n)).join('');
-  return serializeElement(node, children);
+
+const serializeParagraph = (paragraphNodesList: any , type: string) => {
+  const document = paragraphNodesList.children.map((childNodes: any) => {
+      const text = getParagraphText(childNodes);
+      const properties = getParagraphProperties(childNodes);
+      return {text, properties};
+  })
+  const paragraphBlock =  {type, properties: {document}};
+  return paragraphBlock;
 }
 
-//serialize elements
-function serializeElement(element:any, children:any) {
-  switch(element.type) {
-    case 'paragraph':
-      console.log("c---------> ", children);
-      return [{type:"text" , children:children}]
-   
-    default:
-        console.log("c---------> ", children);
-      return children
+const serializeHeading = (headingNodes: any, type: String) => {
+  const document = headingNodes.children.map((childNode: any) => {
+    const properties = getHeadingProperties(childNode);
+    return {text:childNode.text , properties};
+})
+const headingBlock =  {type: type, properties: {document}};
+return headingBlock;
+}
+
+const getParagraphText = (textNode: any) => {
+  if ("type" in textNode && textNode.type === "link") {
+    return textNode.children[0].text;
   }
+  else return textNode.text;
 }
 
-//serialize leaf
-// function serializeLeaf(leaf:any, children:any) {
-//   if (leaf.bold) {
-//     children = `<strong>${children}</strong>`
-//   }
-//   if (leaf.code) {
-//     children = `<code>${children}</code>`
-//   }
-//   if (leaf.italic) {
-//     children = `<em>${children}</em>`
-//   }
-//   if (leaf.underlined) {
-//     children = `<u>${children}</u>`
-//   }
-//   return `<span>${children}</span>`
-// }
+const getParagraphProperties = (textNode: any) => {
+  let properties = [];
+  if("type" in textNode  && textNode.type === "link") {
+    properties.push("a", textNode.url);
+  }
+  else if (textNode.code) {
+    properties.push("code");
+  }
+  else {
+  if (textNode.bold) properties.push("b");
+  if (textNode.italic) properties.push("i");
+  if (textNode.underlined) properties.push('u');
+  }
+  return properties;
+}
+const getHeadingProperties = (textNode: any) => {
+let properties = [];
+if (textNode.italic) properties.push("i");
+if (textNode.underlined) properties.push('u');
+  return properties;
+}

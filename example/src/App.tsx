@@ -6,11 +6,10 @@ const App = () => {
    const [document1, setDocument1] = useState<any>(initialValue.children);
     const setContent1 = (content: any) => {
       setDocument1(content);
-
-     const s =  serializeHTML(initialValue);
-    
-     console.log(s);
+     let serialized =  serializeHTML(content);
+     console.log(serialized);
     };
+
   return (
     <>
       <Editor data={document1} setContent={setContent1} readOnly={false} />
@@ -21,7 +20,7 @@ const App = () => {
 
 const initialValue = {
   children: [
-  
+
   {
     type: 'paragraph',
     children: [
