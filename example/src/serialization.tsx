@@ -19,22 +19,22 @@ export const serializeHTML = (slateNodesList:any) => {
 
   }
 
-const serializeParagraph = (paragraphNodesList: any , type: string) => {
+const serializeParagraph = (paragraphNodesList: any , textType: string) => {
   const document = paragraphNodesList.children.map((childNodes: any) => {
       const text = getParagraphText(childNodes);
       const properties = getParagraphProperties(childNodes);
       return {text, properties};
   })
-  const paragraphBlock =  {type, properties: {document}};
+  const paragraphBlock =  {type: textType, properties: {document}};
   return paragraphBlock;
 }
 
-const serializeHeading = (headingNodes: any, type: String) => {
+const serializeHeading = (headingNodes: any, headingType: String) => {
   const document = headingNodes.children.map((childNode: any) => {
     const properties = getHeadingProperties(childNode);
     return {text:childNode.text , properties};
 })
-const headingBlock =  {type: type, properties: {document}};
+const headingBlock =  {type: headingType, properties: {document}};
 return headingBlock;
 }
 
