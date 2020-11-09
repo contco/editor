@@ -1,45 +1,67 @@
 import React, { useState } from 'react'
 import  { Editor }  from "editor";
-import {serializeHTML} from './serialization';
-import {deserialization} from "./deserialization";
 
 const App = () => {
-   const [document1, setDocument1] = useState<any>(initialValue.children);
-   const [serializedData ,setSerializedData] = useState();
-    const setContent1 = (content: any) => {
-      setDocument1(content);
-     let serialized =  serializeHTML(content);
-     setSerializedData(serialized);
-     let deserialized = deserialization(serialized);
-      console.log("d", deserialized);
+   const [document, setDocument] = useState<any>(blockInitalValue);
+    const setContent = (content: any) => {
+      setDocument(content);
     };
-
-    console.log(serializedData);
-    console.log(document1);
+    console.log(document);
   return (
     <>
-      <Editor data={document1} setContent={setContent1} readOnly={false} />
+      <Editor data={blockInitalValue} setContent={setContent} readOnly={false} />
 
   </>
   )
 }
 
-const initialValue = {
-  children: [
 
+const blockInitalValue = [
   {
-    type: 'paragraph',
-    children: [
-      { text: 'This is editable ' },
-      { text: 'rich', bold: true },
-      { text: ' text, ' },
-      { text: 'much', italic: true },
-      { text: ' better than a ' },
-      { text: 'Hello World', code: true },
-      { text: '!' },
-    ],
+    type: "heading-one",
+    properties: {
+      document: [
+        {
+        text: "  Heading One",
+        properties: []
+      }
+    ]
+    }
   },
-],
-}
-
+  {
+    type: "heading-two",
+    properties: {
+      document: [
+        {
+        text: "   Heading Two",
+        properties: []
+      }
+    ]
+    }
+  },
+  {
+    type: "block-quote",
+    properties: {
+      document: [
+        {
+        text: "What Goes Around Comes Around",
+        properties: []
+      }
+    ]
+    }
+  },
+  {
+    type: "text",
+      properties: {
+        document: [
+          {text: "        This is editable, ", properties: []},
+          {text: "rich ", properties: ['b']},
+          {text: "text", properties: ['b', 'u']},
+          {text: ", much ", properties: ['b', 'i']},
+          {text: "better than a", properties: []},
+          {text: "Hello World", properties: ['code']},
+        ]
+      }
+  }
+];
 export default App
