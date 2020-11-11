@@ -45,11 +45,9 @@ const Editor: (props: Props) => any = ({
 
   const onChangeContent = (newData: any) => {
     setData(newData)
-    console.log('newData', newData)
     setContent(serialize(newData))
   }
 
-  console.log(editorData)
   return (
     <Fragment>
       <Slate
