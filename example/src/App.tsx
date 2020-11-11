@@ -2,68 +2,66 @@ import React, { useState } from 'react'
 import  { Editor }  from "editor";
 
 const App = () => {
-   const [document1, setDocument1] = useState<any>(initialValue.children);
-  
-    const setContent1 = (content: any) => {
-      setDocument1(content);
+   const [document, setDocument] = useState<any>(blockInitalValue);
+    const setContent = (content: any) => {
+      setDocument(content);
     };
-
+    console.log(document);
   return (
-      <Editor data={document1} setContent={setContent1} />
+    <>
+      <Editor data={blockInitalValue} setContent={setContent} readOnly={false} />
+
+  </>
   )
 }
 
-const initialValue = {
-  children: [
-  {
-    type: 'heading-one',
-    children: [{ text: "Heading 1" }],
-  },
-  {
-    type: 'heading-two',
-    children: [{ text: "Heading 2" }],
-  },
-  {
-    type: 'paragraph',
-    children: [
-      { text: 'This is editable ' },
-      { text: 'rich', bold: true },
-      { text: ' text, ' },
-      { text: 'much', italic: true },
-      { text: ' better than a ' },
-      { text: 'Hello World', code: true },
-      { text: '!' },
-    ],
-  },
-  {
-    type: 'paragraph',
-    children: [
-      {
-        text:
-          "Since it's rich text, you can do things like turn a selection of text ",
-      },
-      { text: 'bold', bold: true },
-      {
-        text:
-          ', or add a semantically rendered block quote in the middle of the page, like this: ',
-      },
-      {  
-        type: 'link',
-        url: 'https://en.wikipedia.org/wiki/Hypertext',
-        children: [{ text: 'hyperlinks' }],
-      }
-    ],
-  },
- 
-  {
-    type: 'block-quote',
-    children: [{ text: 'A wise quote.' }],
-  },
-  {
-    type: 'paragraph',
-    children: [{ text: 'Try it out for yourself!' }],
-  },
-],
-}
 
+const blockInitalValue = [
+  {
+    type: "heading-one",
+    properties: {
+      document: [
+        {
+        text: "  Heading One",
+        properties: []
+      }
+    ]
+    }
+  },
+  {
+    type: "heading-two",
+    properties: {
+      document: [
+        {
+        text: "   Heading Two",
+        properties: []
+      }
+    ]
+    }
+  },
+  {
+    type: "block-quote",
+    properties: {
+      document: [
+        {
+        text: "What Goes Around Comes Around",
+        properties: []
+      }
+    ]
+    }
+  },
+  {
+    type: "text",
+      properties: {
+        document: [
+          {text: "        This is editable, ", properties: []},
+          {text: "rich ", properties: ['b']},
+          {text: "text", properties: ['b', 'u']},
+          {text: ", much ", properties: ['b', 'i']},
+          {text: "better than a", properties: []},
+          {text: "Hello World", properties: ['code']},
+        ]
+      }
+  }
+];
 export default App
