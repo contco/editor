@@ -15,22 +15,26 @@ const serialize = (slateNodesList: any) => {
   return serializedBlocks
 }
 
-const serializeParagraph = (paragraphNodesList: any, textType: string) => {
-  const document = paragraphNodesList.children.map((childNodes: any) => {
+const serializeParagraph = (paragraphNode: any, textType: string) => {
+  const document = paragraphNode.children.map((childNodes: any) => {
     const text = getParagraphText(childNodes)
     const properties = getParagraphProperties(childNodes)
     return { text, properties }
   })
-  const paragraphBlock = { type: textType, properties: { document } }
+  const paragraphBlock = checkIdAndReturnBlock(
+    textType,
+    document,
+    paragraphNode
+  )
   return paragraphBlock
 }
 
-const serializeHeading = (headingNodes: any, headingType: String) => {
-  const document = headingNodes.children.map((childNode: any) => {
+const serializeHeading = (headingNode: any, headingType: string) => {
+  const document = headingNode.children.map((childNode: any) => {
     const properties = getHeadingProperties(childNode)
     return { text: childNode.text, properties }
   })
-  const headingBlock = { type: headingType, properties: { document } }
+  const headingBlock = checkIdAndReturnBlock(headingType, document, headingNode)
   return headingBlock
 }
 
@@ -60,4 +64,9 @@ const getHeadingProperties = (textNode: any) => {
   return properties
 }
 
+const checkIdAndReturnBlock = (type: string, document: any, node: any) => {
+  if (node._id) {
+    return { block: { _id: node._id, type: type, properties: { document } } }
+  } else return { block: { type: type, properties: { document } } }
+}
 export default serialize

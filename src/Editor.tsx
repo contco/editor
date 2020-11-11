@@ -5,7 +5,7 @@ import React, {
   useMemo,
   Fragment
 } from 'react'
-import { createEditor } from 'slate'
+import { createEditor, Transforms } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
 
 import { ToolBar } from './ToolBar'
@@ -45,6 +45,7 @@ const Editor: (props: Props) => any = ({
 
   const onChangeContent = (newData: any) => {
     setData(newData)
+    console.log('newData', newData)
     setContent(serialize(newData))
   }
 
@@ -61,6 +62,15 @@ const Editor: (props: Props) => any = ({
           renderElement={renderElement}
           renderLeaf={renderLeaf}
           readOnly={readOnly}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault()
+              Transforms.insertNodes(editor, {
+                type: 'paragraph',
+                children: [{ text: '' }]
+              })
+            }
+          }}
         />
       </Slate>
     </Fragment>
