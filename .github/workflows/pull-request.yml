@@ -1,7 +1,7 @@
 name: Node.js Package
 
 on:
-  pull:
+  pull-request:
     branches:
     - develop
 jobs:
