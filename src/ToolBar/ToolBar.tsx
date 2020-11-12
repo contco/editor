@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, createRef, Fragment } from 'react';
+import React, { useRef, useEffect, useState, createRef } from 'react';
 import { ReactEditor, useSlate } from 'slate-react';
 import { Editor, Range } from 'slate';
 import { Menu, Portal, LinkInput } from '../Helpers/Helper';
