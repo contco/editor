@@ -21,6 +21,7 @@ jobs:
             git config user.email ""
             git config user.name "Publish Action"
       - run: |
+            git status --porcelain
             npm version patch
             git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY"
       - run: npm publish
