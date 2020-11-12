@@ -7,7 +7,7 @@
       "esnext"
     ],
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "preserve",
     "sourceMap": true,
     "declaration": true,
     "esModuleInterop": true,
