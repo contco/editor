@@ -45,7 +45,6 @@ module.exports = {
       "error"
     ],
     "react/jsx-props-no-spreading": "off",
-    "import/prefer-default-export": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "jsx-a11y/anchor-is-valid": [
       'error',

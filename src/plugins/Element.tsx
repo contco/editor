@@ -2,7 +2,7 @@ import * as React from 'react';
 import { RenderElementProps } from 'slate-react';
 import { Paragraph, CodeBlock, BlockQuote, Link, LinkContainer, Triangle, Rectangle } from './ElementStyle';
 
-export const Element: React.FC<RenderElementProps> = ({ attributes, children, element }: any) => {
+const Element: React.FC<RenderElementProps> = ({ attributes, children, element }: any) => {
   switch (element.type) {
     case 'paragraph':
       return <Paragraph {...attributes}>{children}</Paragraph>;
@@ -34,3 +34,5 @@ export const Element: React.FC<RenderElementProps> = ({ attributes, children, el
       return <p {...attributes}>{children}</p>;
   }
 };
+
+export default Element;

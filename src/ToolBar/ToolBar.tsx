@@ -1,4 +1,5 @@
-import React, { useRef, useEffect, useState, createRef } from 'react';
+import * as React from 'react';
+import { useRef, useEffect, useState, createRef } from 'react';
 import { ReactEditor, useSlate } from 'slate-react';
 import { Editor, Range } from 'slate';
 import { Menu, Portal, LinkInput } from '../Helpers/Helper';
@@ -92,37 +93,33 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
   };
   if (isInput) {
     return (
-      <>
-        <Portal>
-          <Menu ref={inputMenuRef}>
-            <div>
-              <LinkInput
-                onBlur={() => setIsInput(false)}
-                autoFocus
-                ref={inputContainerRef}
-                type="text"
-                onKeyPress={(e) => handleInput(e)}
-              />
-            </div>
-          </Menu>
-        </Portal>
-      </>
+      <Portal>
+        <Menu ref={inputMenuRef}>
+          <div>
+            <LinkInput
+              onBlur={() => setIsInput(false)}
+              autoFocus
+              ref={inputContainerRef}
+              type="text"
+              onKeyPress={(e) => handleInput(e)}
+            />
+          </div>
+        </Menu>
+      </Portal>
     );
   }
   return (
-    <>
-      <Portal>
-        <Menu ref={ref}>
-          <MarkButton format="bold" icon={Bold} />
-          <MarkButton format="italic" icon={Italic} />
-          <MarkButton format="underlined" icon={Underline} />
-          <LinkButton showInput={LinkButtonClick} icon={Link} />
-          <BlockButton format="heading-one" icon={H1} />
-          <BlockButton format="heading-two" icon={H2} />
-          <BlockButton format="block-quote" icon={Quote} />
-          <MarkButton format="code" icon={Coding} />
-        </Menu>
-      </Portal>
-    </>
+    <Portal>
+      <Menu ref={ref}>
+        <MarkButton format="bold" icon={Bold} />
+        <MarkButton format="italic" icon={Italic} />
+        <MarkButton format="underlined" icon={Underline} />
+        <LinkButton showInput={LinkButtonClick} icon={Link} />
+        <BlockButton format="heading-one" icon={H1} />
+        <BlockButton format="heading-two" icon={H2} />
+        <BlockButton format="block-quote" icon={Quote} />
+        <MarkButton format="code" icon={Coding} />
+      </Menu>
+    </Portal>
   );
 };
