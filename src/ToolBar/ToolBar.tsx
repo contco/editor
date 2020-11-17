@@ -1,26 +1,25 @@
-import React, { useRef, useEffect, useState, createRef, Fragment } from "react";
-import { ReactEditor, useSlate } from "slate-react";
-import { Editor } from "slate";
-import { Menu, Portal, LinkInput} from "../Helpers/Helper";
-import { BlockButton } from "../Helpers/BlockHelper";
-import { MarkButton } from "../Helpers/MarkHelper";
-import { LinkButton, insertLink } from "../Helpers/LinkHelper";
-import { Range } from "slate";
+import * as React from 'react';
+import { useRef, useEffect, useState, createRef } from 'react';
+import { ReactEditor, useSlate } from 'slate-react';
+import { Editor, Range } from 'slate';
+import { Menu, Portal, LinkInput } from '../Helpers/Helper';
+import { BlockButton } from '../Helpers/BlockHelper';
+import { MarkButton } from '../Helpers/MarkHelper';
+import { LinkButton, insertLink } from '../Helpers/LinkHelper';
 
-//icons
-import { ReactComponent as Bold } from "../assets/bold.svg";
-import { ReactComponent as Coding } from "../assets/coding.svg";
-import { ReactComponent as Italic } from "../assets/italic.svg";
-import { ReactComponent as Link } from "../assets/link.svg";
-import { ReactComponent as Quote } from "../assets/quote.svg";
-import { ReactComponent as Underline } from "../assets/underline.svg";
-import { ReactComponent as H1 } from "../assets/h1.svg";
-import { ReactComponent as H2 } from "../assets/h2.svg";
+// icons
+import { ReactComponent as Bold } from '../assets/bold.svg';
+import { ReactComponent as Coding } from '../assets/coding.svg';
+import { ReactComponent as Italic } from '../assets/italic.svg';
+import { ReactComponent as Link } from '../assets/link.svg';
+import { ReactComponent as Quote } from '../assets/quote.svg';
+import { ReactComponent as Underline } from '../assets/underline.svg';
+import { ReactComponent as H1 } from '../assets/h1.svg';
+import { ReactComponent as H2 } from '../assets/h2.svg';
 
-export interface ToolBarProps { }
+export interface ToolBarProps {}
 
 export const ToolBar: React.FC<ToolBarProps> = () => {
-
   const [isInput, setIsInput] = useState<boolean>(false);
   const [inputToolbarPosition, setInputToolbarPosition] = useState<any>({});
   const [selectedArea, setSelectedArea] = useState<any>({});
@@ -31,7 +30,6 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
   let el: any;
   let rect: any;
   const { selection } = editor;
-
 
   useEffect(() => {
     if (isInput) {
@@ -45,32 +43,29 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
     }
   });
 
-
-
-  //tooltip reference
+  // tooltip reference
   useEffect(() => {
     el = ref.current;
     if (!el) {
       return;
     }
     if (
-      (!isInput) &&
+      !isInput &&
       (!selection ||
         !ReactEditor.isFocused(editor) ||
         Range.isCollapsed(selection) ||
-        Editor.string(editor, selection) === "")
+        Editor.string(editor, selection) === '')
     ) {
-      el.removeAttribute("style");
+      el.removeAttribute('style');
       return;
     }
+
     const domSelection = window.getSelection();
     const domRange = domSelection?.getRangeAt(0);
     rect = domRange?.getBoundingClientRect();
     el.style.opacity = 1;
     el.style.top = `${rect?.top + window.pageYOffset - el.offsetHeight + 70}px`;
-    el.style.left = `${
-      rect?.left + window.pageXOffset - el.offsetWidth / 2 + rect?.width / 2
-      }px`;
+    el.style.left = `${rect?.left + window.pageXOffset - el.offsetWidth / 2 + rect?.width / 2}px`;
   });
 
   const LinkButtonClick = () => {
@@ -78,40 +73,42 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
     const domSelection = window.getSelection();
     const domRange = domSelection?.getRangeAt(0);
     rect = domRange?.getBoundingClientRect();
-    let position = {
-      top: `${rect?.top + window.pageYOffset - el.offsetHeight + 70}px`, left: `${
-        rect?.left + window.pageXOffset - el.offsetWidth / 2 + rect?.width / 2
-        }px`
+    const position = {
+      top: `${rect?.top + window.pageYOffset - el.offsetHeight + 70}px`,
+      left: `${rect?.left + window.pageXOffset - el.offsetWidth / 2 + rect?.width / 2}px`,
     };
     setInputToolbarPosition(position);
     setIsInput(true);
-  }
+  };
   const handleInput = (e: any) => {
     if (e.key === 'Enter') {
       const val = e.target.value;
-      editor['selection'] = selectedArea;
+      editor.selection = selectedArea;
       insertLink(editor, val);
       setIsInput(false);
     }
     if (e.key === 'Escape') {
       setIsInput(false);
     }
-  }
+  };
   if (isInput) {
     return (
-      <Fragment>
       <Portal>
         <Menu ref={inputMenuRef}>
           <div>
-            <LinkInput onBlur={() => setIsInput(false)} autoFocus ref={inputContainerRef} type="text" onKeyPress={(e) => handleInput(e)} />
+            <LinkInput
+              onBlur={() => setIsInput(false)}
+              autoFocus
+              ref={inputContainerRef}
+              type="text"
+              onKeyPress={(e) => handleInput(e)}
+            />
           </div>
         </Menu>
       </Portal>
-      </Fragment>
     );
   }
   return (
-    <Fragment>
     <Portal>
       <Menu ref={ref}>
         <MarkButton format="bold" icon={Bold} />
@@ -124,6 +121,5 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
         <MarkButton format="code" icon={Coding} />
       </Menu>
     </Portal>
-    </Fragment>
   );
 };
