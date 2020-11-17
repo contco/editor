@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+
 const getParagraphText = (textNode: any) => {
   if ('type' in textNode && textNode.type === 'link') {
     return textNode.children[0].text;
@@ -18,15 +20,6 @@ const getParagraphProperties = (textNode: any) => {
   }
   return properties;
 };
-const serializeParagraph = (paragraphNodesList: any, textType: string) => {
-  const document = paragraphNodesList.children.map((childNodes: any) => {
-    const text = getParagraphText(childNodes);
-    const properties = getParagraphProperties(childNodes);
-    return { text, properties };
-  });
-  const paragraphBlock = { type: textType, properties: { document } };
-  return paragraphBlock;
-};
 
 const getHeadingProperties = (textNode: any) => {
   const properties = [];
@@ -35,12 +28,29 @@ const getHeadingProperties = (textNode: any) => {
   return properties;
 };
 
-const serializeHeading = (headingNodes: any, headingType: String) => {
-  const document = headingNodes.children.map((childNode: any) => {
+const checkIdAndReturnBlock = (type: string, document: any, node: any) => {
+  if (node._id) {
+    return { block: { _id: node._id, type, properties: { document } } };
+  }
+  return { block: { type, properties: { document } } };
+};
+
+const serializeParagraph = (paragraphNode: any, textType: string) => {
+  const document = paragraphNode.children.map((childNodes: any) => {
+    const text = getParagraphText(childNodes);
+    const properties = getParagraphProperties(childNodes);
+    return { text, properties };
+  });
+  const paragraphBlock = checkIdAndReturnBlock(textType, document, paragraphNode);
+  return paragraphBlock;
+};
+
+const serializeHeading = (headingNode: any, headingType: string) => {
+  const document = headingNode.children.map((childNode: any) => {
     const properties = getHeadingProperties(childNode);
     return { text: childNode.text, properties };
   });
-  const headingBlock = { type: headingType, properties: { document } };
+  const headingBlock = checkIdAndReturnBlock(headingType, document, headingNode);
   return headingBlock;
 };
 
@@ -60,5 +70,4 @@ const serialize = (slateNodesList: any) => {
   });
   return serializedBlocks;
 };
-
 export default serialize;

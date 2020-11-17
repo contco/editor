@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { createEditor } from 'slate';
+import { createEditor, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 
 import { withHistory } from 'slate-history';
@@ -36,11 +36,23 @@ const Editor: (props: Props) => any = ({ data, setContent, readOnly = false }) =
     setContent(serialize(newData));
   };
 
-  console.log(editorData);
   return (
     <Slate editor={editor} value={editorData} onChange={(newValue: any) => onChangeContent(newValue)}>
       <ToolBar />
-      <Editable renderElement={renderElement} renderLeaf={renderLeaf} readOnly={readOnly} />
+      <Editable
+        renderElement={renderElement}
+        renderLeaf={renderLeaf}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            Transforms.insertNodes(editor, {
+              type: 'paragraph',
+              children: [{ text: '' }],
+            });
+          }
+        }}
+        readOnly={readOnly}
+      />
     </Slate>
   );
 };

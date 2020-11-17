@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import  { Editor }  from "editor";
 
 const App = () => {
-   const [document, setDocument] = useState<any>(blockInitalValue);
-    const setContent = (content: any) => {
+  const [document, setDocument] = useState<any>(blockInitalValue);
+  const setContent = (content: any) => {
       setDocument(content);
     };
     console.log(document);
@@ -17,7 +17,10 @@ const App = () => {
 
 
 const blockInitalValue = [
+
   {
+    block: {
+    _id: "1",
     type: "heading-one",
     properties: {
       document: [
@@ -27,8 +30,11 @@ const blockInitalValue = [
       }
     ]
     }
+  }
   },
   {
+    block: {
+    _id: "2",
     type: "heading-two",
     properties: {
       document: [
@@ -38,8 +44,11 @@ const blockInitalValue = [
       }
     ]
     }
+  }
   },
   {
+    block: {
+    _id: "3",
     type: "block-quote",
     properties: {
       document: [
@@ -47,10 +56,13 @@ const blockInitalValue = [
         text: "What Goes Around Comes Around",
         properties: []
       }
-    ]
+      ]
     }
+  }
   },
   {
+    block: {
+    _id: "4",
     type: "text",
       properties: {
         document: [
@@ -62,6 +74,7 @@ const blockInitalValue = [
           {text: "Hello World", properties: ['code']},
         ]
       }
+    }
   }
 ];
 export default App

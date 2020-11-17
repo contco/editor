@@ -1,3 +1,14 @@
+/* eslint-disable no-underscore-dangle */
+
+const getNodeType = (blockType: string) => {
+  switch (blockType) {
+    case 'text':
+      return 'paragraph';
+    default:
+      return blockType;
+  }
+};
+
 const getChildNodes = (block: any) => {
   if (block && 'properties' in block && 'document' in block.properties) {
     const blockDocumentsList = block.properties.document;
@@ -40,20 +51,12 @@ const getChildNodes = (block: any) => {
   return [];
 };
 
-const getNodeType = (blockType: string) => {
-  switch (blockType) {
-    case 'text':
-      return 'paragraph';
-    default:
-      return blockType;
-  }
-};
-
-const deserialization = (blockContent: any) => {
-  const deserializedContent = blockContent.map((block: any) => {
+const deserialization = (blockContentList: any) => {
+  const deserializedContent = blockContentList.map((blockContent: any) => {
+    const { block } = blockContent;
     const children = getChildNodes(block);
     const type = getNodeType(block.type);
-    return { type, children };
+    return { _id: block._id, type, children };
   });
   return deserializedContent;
 };

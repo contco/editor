@@ -8863,6 +8863,10 @@ react-dev-utils@^10.2.1:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
+react-dom@^16.13.1:
+  version "0.0.0"
+  uid ""
+
 "react-dom@link:../node_modules/react-dom":
   version "0.0.0"
   uid ""
