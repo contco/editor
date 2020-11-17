@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle:off */
 import * as React from 'react';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { createEditor, Transforms } from 'slate';
@@ -32,6 +33,28 @@ const Editor: (props: Props) => any = ({ data, setContent, readOnly = false }) =
   }, []);
 
   const onChangeContent = (newData: any) => {
+    // console.log("d------>", serialize(editorData));
+    // console.log("s------>", serialize(newData));
+
+    const nData = serialize(newData);
+    const oData = serialize(editorData);
+    let active: any = {};
+
+    for (let i = 0; i < nData.length; i += 1) {
+      for (let j = 0; j < oData.length; j += 1) {
+        // update
+        if (nData[i].block._id === oData[j].block._id) {
+          if (JSON.stringify(nData[i]) !== JSON.stringify(oData[j])) {
+            active = nData[i];
+            active.state = 'updated';
+          }
+        }
+        // create
+        // delete
+      }
+    }
+    // console.log('active', active);
+
     setData(newData);
     setContent(serialize(newData));
   };
