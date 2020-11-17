@@ -1,49 +1,42 @@
-import styled from "styled-components";
-import {ButtonProps} from './Helper';
-
+/* eslint no-nested-ternary: "off" */
+import styled from 'styled-components';
+import { ButtonProps } from './Helper';
 
 export const StyledButton = styled.span<ButtonProps>`
   cursor: pointer;
-  color: ${(props) =>
-    props.reversed
-      ? props.active
-        ? "white"
-        : "#aaa"
-      : props.active
-        ? "black"
-        : "#ccc"};
+  color: ${(props) => (props.reversed ? (props.active ? 'white' : '#aaa') : props.active ? 'black' : '#ccc')};
 `;
 
 export const StyledIcon = styled.svg`
+  fill: ${(props) => props.color};
+  & use {
     fill: ${(props) => props.color};
-    & use {
-        fill: ${(props) => props.color};
-    }
+  }
 `;
 
-//Menu
+// Menu
 export const Container = styled.div`
-    padding: 8px 7px 6px;
-    position: absolute;
-    z-index: 1;
-    top: -10000px;
-    left: -10000px;
-    opacity: 0;
-    background-color: #050b21;
-    border-radius: 3px;
-    transition: opacity 0.75s;
-    & > * {
-        display: inline-block;
-    }
+  padding: 8px 7px 6px;
+  position: absolute;
+  z-index: 1;
+  top: -10000px;
+  left: -10000px;
+  opacity: 0;
+  background-color: #050b21;
+  border-radius: 3px;
+  transition: opacity 0.75s;
+  & > * {
+    display: inline-block;
+  }
 `;
 export const Triangle = styled.div`
-    position: absolute;
-    top: auto;
-    bottom: 100%;
-    left: 44%;
-    border: solid 8px;
-    border-color: transparent transparent #050b21 transparent;
-    margin: 0 auto;
+  position: absolute;
+  top: auto;
+  bottom: 100%;
+  left: 44%;
+  border: solid 8px;
+  border-color: transparent transparent #050b21 transparent;
+  margin: 0 auto;
 `;
 export const StyledMenu = styled.div`
     border-radius: 3px;
@@ -55,7 +48,7 @@ export const StyledMenu = styled.div`
       margin-left: 15px;
     `;
 
-//link input
+// link input
 export const LinkInput = styled.input`
     border: none;
     background: #050b21;
@@ -64,4 +57,3 @@ export const LinkInput = styled.input`
     padding:6px
     font-size:16px
 `;
-

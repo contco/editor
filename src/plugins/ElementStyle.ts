@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Paragraph = styled.p`
   font-size: 16px;
   line-height: 22px;
   letter-spacing: 0.67px;
-  color: ${({theme}) => theme.colors != undefined?  theme.colors.text : '#050b21'};
+  color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.text : '#050b21')};
 `;
 
 export const CodeBlock = styled.div`
@@ -17,14 +17,13 @@ export const CodeBlock = styled.div`
   padding-right: 50px;
 `;
 
-
 export const BlockQuote = styled.blockquote`
   font-style: normal;
   font-size: 16px;
   min-height: 30px;
-  border-left: 4px solid ${({theme}) => theme.colors != undefined? theme.colors.text : "#000"};
+  border-left: 4px solid ${({ theme }) => (theme.colors !== undefined ? theme.colors.text : '#000')};
   padding-left: 8px;
-  color: ${({theme}) => theme.colors != undefined? theme.colors.text : "#050b21"};
+  color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.text : '#050b21')};
 `;
 
 export const Triangle = styled.span`
@@ -33,9 +32,8 @@ export const Triangle = styled.span`
   border: solid 8px;
   border-color: transparent transparent #050b21 transparent;
   margin: 0 auto;
-  display:flex;
+  display: flex;
 `;
-
 
 export const Rectangle = styled.span`
   width: max-content;
@@ -48,27 +46,27 @@ export const Rectangle = styled.span`
   color: #ffffff !important;
   display: flex;
   align-items: center;
-  `;
+`;
 
 export const LinkContainer = styled.span`
   position: absolute;
-  display:inline-block;
+  display: inline-block;
   width: max-content;
   top: 130%;
   left: 50%;
   margin-top: 2px;
   transform: translate(-50%, -50%);
-  display:none;
+  display: none;
 `;
 export const Link = styled.a`
-   position: relative;
+  position: relative;
   &:hover ${LinkContainer} {
     display: initial;
   }
   &:hover {
     text-decoration: underline;
-    color: ${({theme}) => theme.colors != undefined? theme.colors.link : "#050b21"};
+    color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.link : '#050b21')};
   }
   text-decoration: underline;
-  color: ${({theme}) => theme.colors != undefined? theme.colors.link : "#050b21"};
+  color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.link : '#050b21')};
 `;

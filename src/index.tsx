@@ -1,2 +1,2 @@
-export { default as Editor } from './Editor'
-export * from './plugins'
+export { default as Editor } from './Editor';
+export * from './plugins';
