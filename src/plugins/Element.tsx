@@ -1,6 +1,16 @@
 import * as React from 'react';
 import { RenderElementProps } from 'slate-react';
-import { Paragraph, CodeBlock, BlockQuote, Link, LinkContainer, Triangle, Rectangle } from './ElementStyle';
+import {
+  Paragraph,
+  CodeBlock,
+  BlockQuote,
+  Link,
+  LinkContainer,
+  Triangle,
+  Rectangle,
+  NumberList,
+  BulletList,
+} from './ElementStyle';
 
 const Element: React.FC<RenderElementProps> = ({ attributes, children, element }: any) => {
   switch (element.type) {
@@ -17,9 +27,9 @@ const Element: React.FC<RenderElementProps> = ({ attributes, children, element }
     case 'heading-two':
       return <h2 {...attributes}>{children}</h2>;
     case 'list-item':
-      return <li {...attributes}>{children}</li>;
+      return <BulletList {...attributes}>{children}</BulletList>;
     case 'numbered-list':
-      return <ol {...attributes}>{children}</ol>;
+      return <NumberList {...attributes}>{children}</NumberList>;
     case 'link':
       return (
         <Link {...attributes} href={element.url} target="_blank" contentEditable={false}>
