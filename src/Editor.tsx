@@ -13,15 +13,18 @@ import Leaf from './plugins/Leaf';
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';
 
+const lodash = require('lodash');
+
 interface Props {
   data?: any;
   setContent: (content: any) => void;
+  setActiveBlock: (active: any) => void;
   initialData?: any;
   readOnly?: boolean;
   attributes?: any;
   element?: any;
 }
-const Editor: (props: Props) => any = ({ data, setContent, readOnly = false }) => {
+const Editor: (props: Props) => any = ({ data, setContent, setActiveBlock, readOnly = false }) => {
   const [editorData, setData] = useState([]);
   const editor = useMemo(() => withLinks(withHistory(withReact(createEditor()))), []);
   const renderElement = useCallback((props) => <Element {...props} />, []);
@@ -33,30 +36,31 @@ const Editor: (props: Props) => any = ({ data, setContent, readOnly = false }) =
   }, []);
 
   const onChangeContent = (newData: any) => {
-    // console.log("d------>", serialize(editorData));
-    // console.log("s------>", serialize(newData));
+    let activeBlock: any = [];
+    const nData = [...serialize(newData)];
+    const oData = [...serialize(editorData)];
 
-    const nData = serialize(newData);
-    const oData = serialize(editorData);
-    let active: any = {};
-
-    for (let i = 0; i < nData.length; i += 1) {
-      for (let j = 0; j < oData.length; j += 1) {
-        // update
-        if (nData[i].block._id === oData[j].block._id) {
-          if (JSON.stringify(nData[i]) !== JSON.stringify(oData[j])) {
-            active = nData[i];
-            active.state = 'updated';
-          }
-        }
-        // create
-        // delete
-      }
+    // add
+    if (nData.length > oData.length) {
+      const createdBlock = lodash.differenceWith(nData, oData, lodash.isEqual);
+      activeBlock = createdBlock;
+      activeBlock.push('add');
     }
-    // console.log('active', active);
-
+    // delete
+    else if (nData.length < oData.length) {
+      const deletedBlock = lodash.differenceWith(oData, nData, lodash.isEqual);
+      activeBlock = deletedBlock;
+      activeBlock.push('delete');
+    }
+    // update
+    else {
+      const changeInBlock = lodash.differenceWith(nData, oData, lodash.isEqual);
+      activeBlock = changeInBlock;
+      if (activeBlock.length) activeBlock.push('update');
+    }
+    setActiveBlock(activeBlock);
     setData(newData);
-    setContent(serialize(newData));
+    setContent(nData);
   };
 
   return (

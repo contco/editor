@@ -3,13 +3,15 @@ import { Editor } from 'editor';
 
 const App = () => {
   const [document, setDocument] = useState<any>(blockInitalValue);
+  const [activeBlock, setActiveBlock] = useState<any>([]);
   const setContent = (content: any) => {
     setDocument(content);
   };
   console.log(document);
+  console.log('activeBlock', activeBlock);
   return (
     <>
-      <Editor data={blockInitalValue} setContent={setContent} readOnly={false} />
+      <Editor data={blockInitalValue} setContent={setContent} setActiveBlock={setActiveBlock} />
     </>
   );
 };

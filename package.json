@@ -79,10 +79,11 @@
     "dist"
   ],
   "dependencies": {
-    "react-dom": "^16.13.1",
     "@types/escape-html": "^1.0.0",
     "@types/styled-components": "^5.1.2",
     "is-url": "^1.2.4",
+    "lodash": "^4.17.20",
+    "react-dom": "^16.13.1",
     "slate": "^0.58.4",
     "slate-history": "^0.58.4",
     "slate-hyperscript": "^0.59.0",
