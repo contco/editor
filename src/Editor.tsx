@@ -63,21 +63,23 @@ const Editor: (props: Props) => any = ({ data, setContent, setActiveBlock, readO
     setContent(nData);
   };
 
+  const handKeyDown = (event: any) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      Transforms.insertNodes(editor, {
+        type: 'paragraph',
+        children: [{ text: '' }],
+      });
+    }
+  };
+
   return (
     <Slate editor={editor} value={editorData} onChange={(newValue: any) => onChangeContent(newValue)}>
       <ToolBar />
       <Editable
         renderElement={renderElement}
         renderLeaf={renderLeaf}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter') {
-            event.preventDefault();
-            Transforms.insertNodes(editor, {
-              type: 'paragraph',
-              children: [{ text: '' }],
-            });
-          }
-        }}
+        onKeyDown={(event) => handKeyDown(event)}
         readOnly={readOnly}
       />
     </Slate>
