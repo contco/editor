@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { createEditor, Transforms } from 'slate';
+import { createEditor } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
-
+import isHotkey from 'is-hotkey';
 import { withHistory } from 'slate-history';
+import { ToggleMark } from './Helpers/MarkHelper';
+import HOTKEYS from './Helpers/HotKeys';
+
 import { ToolBar } from './ToolBar';
 import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
@@ -20,6 +23,7 @@ interface Props {
   attributes?: any;
   element?: any;
 }
+
 const Editor: (props: Props) => any = ({ data, setContent, readOnly = false }) => {
   const [editorData, setData] = useState([]);
   const editor = useMemo(() => withLinks(withHistory(withReact(createEditor()))), []);
@@ -43,13 +47,13 @@ const Editor: (props: Props) => any = ({ data, setContent, readOnly = false }) =
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         onKeyDown={(event) => {
-          if (event.key === 'Enter') {
-            event.preventDefault();
-            Transforms.insertNodes(editor, {
-              type: 'paragraph',
-              children: [{ text: '' }],
-            });
-          }
+          Object.keys(HOTKEYS).forEach((key) => {
+            if (isHotkey(key, event as any)) {
+              event.preventDefault();
+              const mark = HOTKEYS[key];
+              ToggleMark(editor, mark);
+            }
+          });
         }}
         readOnly={readOnly}
       />
