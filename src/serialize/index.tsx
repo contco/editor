@@ -4,6 +4,10 @@ const getParagraphText = (textNode: any) => {
   if ('type' in textNode && textNode.type === 'link') {
     return textNode.children[0].text;
   }
+  if ('type' in textNode && textNode.type === 'numbered-list') {
+    return textNode.children[0].text;
+  }
+
   return textNode.text;
 };
 
@@ -61,6 +65,8 @@ const serialize = (slateNodesList: any) => {
         return serializeParagraph(node, 'text');
       case 'block-quote':
         return serializeParagraph(node, 'block-quote');
+      case 'numbered-list':
+        return serializeParagraph(node, 'numbered-list');
       case 'heading-one':
       case 'heading-two':
         return serializeHeading(node, node.type);
