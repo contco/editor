@@ -4,8 +4,11 @@ const getParagraphText = (textNode: any) => {
   if ('type' in textNode && textNode.type === 'link') {
     return textNode.children[0].text;
   }
+  console.log('textNode', textNode);
   if ('type' in textNode && textNode.type === 'list-item') {
-    return textNode.children[0].text;
+    for (let i = 0; i < textNode.children.length; i += 1) {
+      return textNode.children[i].text;
+    }
   }
   return textNode.text;
 };
@@ -15,14 +18,17 @@ const getParagraphProperties = (textNode: any) => {
   if ('type' in textNode && textNode.type === 'link') {
     properties.push('a', textNode.url);
   } else if ('type' in textNode && textNode.type === 'list-item') {
-    if (textNode.children[0].bold) {
-      properties.push('b');
-    }
-    if (textNode.children[0].italic) {
-      properties.push('i');
-    }
-    if (textNode.children[0].underlined) {
-      properties.push('u');
+    for (let i = 0; i < textNode.children.length; i += 1) {
+      console.log('textNode.children[i]', textNode.children[i]);
+      if (textNode.children[i].bold) {
+        properties.push('b', textNode.children[i].text);
+      }
+      if (textNode.children[i].italic) {
+        properties.push('i');
+      }
+      if (textNode.children[i].underlined) {
+        properties.push('u');
+      }
     }
   } else if (textNode.code) {
     properties.push('code');
@@ -75,7 +81,7 @@ const serialize = (slateNodesList: any) => {
       case 'block-quote':
         return serializeParagraph(node, 'block-quote');
       case 'numbered-list':
-        return serializeParagraph(node, 'numbered-list');
+        return serializeParagraph(node.children[0], 'numbered-list');
       case 'bulleted-list':
         return serializeParagraph(node, 'bulleted-list');
       case 'heading-one':
