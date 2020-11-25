@@ -74,22 +74,20 @@ const serializeHeading = (headingNode: any, headingType: string) => {
 };
 
 const serialize = (slateNodesList: any) => {
+  const numberList = {};
   const serializedBlocks = slateNodesList.map((node: any) => {
     switch (node.type) {
       case 'paragraph':
         return serializeParagraph(node, 'text');
       case 'block-quote':
         return serializeParagraph(node, 'block-quote');
-
-      // case 'numbered-list':
-      // let i = -1;
-
-      //   if (node.children.length) {
-      //     i += 1;
-      //     i %= node.children.length;
-      //     console.log(`${i} =========================== ${node.children.length}`);
-      //     return serializeParagraph(node.children[i], 'numbered-list');
-      //   // }
+      case 'numbered-list':
+        numberList.blocks = [];
+        for (let i = 0; i < node.children.length; i += 1) {
+          numberList.blocks.push(serializeParagraph(node.children[i], 'list-item'));
+        }
+        numberList.type = 'numbered-list';
+        return numberList;
       case 'bulleted-list':
         return serializeParagraph(node, 'bulleted-list');
       case 'heading-one':
