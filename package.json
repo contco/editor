@@ -81,6 +81,7 @@
   "dependencies": {
     "@types/escape-html": "^1.0.0",
     "@types/styled-components": "^5.1.2",
+    "@udecode/slate-plugins": "^0.71.0",
     "is-url": "^1.2.4",
     "lodash": "^4.17.20",
     "react-dom": "^16.13.1",

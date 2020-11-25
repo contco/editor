@@ -29,8 +29,8 @@ const getHeadingProperties = (textNode: any) => {
 };
 
 const checkIdAndReturnBlock = (type: string, document: any, node: any) => {
-  if (node._id) {
-    return { block: { _id: node._id, type, properties: { document } } };
+  if (node.id) {
+    return { block: { _id: node.id, type, properties: { document } } };
   }
   return { block: { type, properties: { document } } };
 };
