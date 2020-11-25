@@ -74,7 +74,7 @@ const serializeHeading = (headingNode: any, headingType: string) => {
 };
 
 const serialize = (slateNodesList: any) => {
-  const numberList = {};
+  const numberList: any = { blocks: [] };
   const serializedBlocks = slateNodesList.map((node: any) => {
     switch (node.type) {
       case 'paragraph':
