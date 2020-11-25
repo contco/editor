@@ -36,27 +36,34 @@ const Editor: (props: Props) => any = ({ data, setContent, setActiveBlock, readO
   }, []);
 
   const onChangeContent = (newData: any) => {
-    let activeBlock: any = [];
+    const activeBlock: any = {};
     const nData = [...serialize(newData)];
     const oData = [...serialize(editorData)];
 
     // add
     if (nData.length > oData.length) {
       const createdBlock = lodash.differenceWith(nData, oData, lodash.isEqual);
-      activeBlock = createdBlock;
-      activeBlock.push('add');
+      activeBlock.blocks = createdBlock;
+      activeBlock.operation = 'add';
     }
     // delete
     else if (nData.length < oData.length) {
       const deletedBlock = lodash.differenceWith(oData, nData, lodash.isEqual);
-      activeBlock = deletedBlock;
-      activeBlock.push('delete');
+      activeBlock.blocks = deletedBlock;
+      activeBlock.operation = 'delete';
     }
     // update
     else {
-      const changeInBlock = lodash.differenceWith(nData, oData, lodash.isEqual);
-      activeBlock = changeInBlock;
-      if (activeBlock.length) activeBlock.push('update');
+      for (let i = 0; i < nData.length; i += 1) {
+        for (let j = 0; j < oData.length; j += 1) {
+          if (nData[i].block._id === oData[j].block._id) {
+            if (JSON.stringify(nData[i]) !== JSON.stringify(oData[j])) {
+              activeBlock.blocks = [nData[i]];
+              activeBlock.operation = 'update';
+            }
+          }
+        }
+      }
     }
     setActiveBlock(activeBlock);
     setData(newData);
