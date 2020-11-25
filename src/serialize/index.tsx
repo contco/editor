@@ -80,8 +80,16 @@ const serialize = (slateNodesList: any) => {
         return serializeParagraph(node, 'text');
       case 'block-quote':
         return serializeParagraph(node, 'block-quote');
-      case 'numbered-list':
-        return serializeParagraph(node.children[0], 'numbered-list');
+
+      // case 'numbered-list':
+      // let i = -1;
+
+      //   if (node.children.length) {
+      //     i += 1;
+      //     i %= node.children.length;
+      //     console.log(`${i} =========================== ${node.children.length}`);
+      //     return serializeParagraph(node.children[i], 'numbered-list');
+      //   // }
       case 'bulleted-list':
         return serializeParagraph(node, 'bulleted-list');
       case 'heading-one':
