@@ -5,11 +5,12 @@ import { createEditor } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 
 import { withHistory } from 'slate-history';
-import { withNodeID, pipe } from '@udecode/slate-plugins';
+import { pipe } from '@udecode/slate-plugins';
 import { ToolBar } from './ToolBar';
 import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
 import Leaf from './plugins/Leaf';
+import withUUID from './Helpers/withUUID';
 
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';
@@ -27,7 +28,7 @@ interface Props {
 }
 const Editor: (props: Props) => any = ({ data, setContent, setActiveBlock, readOnly = false }) => {
   const [editorData, setData] = useState([]);
-  const withPlugins = [withReact, withHistory, withLinks, withNodeID()] as const;
+  const withPlugins = [withReact, withHistory, withLinks, withUUID] as const;
   const editor: any = useMemo(() => pipe(createEditor(), ...withPlugins), []);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
@@ -56,16 +57,6 @@ const Editor: (props: Props) => any = ({ data, setContent, setActiveBlock, readO
     }
     // update
     else {
-      // for (let i = 0; i < nData.length; i += 1) {
-      //   for (let j = 0; j < oData.length; j += 1) {
-      //     if (nData[i].block._id === oData[j].block._id) {
-      //       if (JSON.stringify(nData[i]) !== JSON.stringify(oData[j])) {
-      //         activeBlock.blocks = [nData[i]];
-      //         activeBlock.operation = 'update';
-      //       }
-      //     }
-      //   }
-      // }
       const changeInBlock = lodash.differenceWith(nData, oData, lodash.isEqual);
       activeBlock.blocks = changeInBlock;
       if (activeBlock.blocks.length) activeBlock.operation = 'update';
@@ -76,14 +67,9 @@ const Editor: (props: Props) => any = ({ data, setContent, setActiveBlock, readO
   };
 
   const handKeyDown = (event: any) => {
-    console.log(event);
-    // if (event.key === 'Enter') {
-    //   event.preventDefault();
-    //   Transforms.insertNodes(editor, {
-    //     type: 'paragraph',
-    //     children: [{ text: '' }],
-    //   });
-    // }
+    if (event.key === 'Enter') {
+      console.log(event);
+    }
   };
 
   return (
