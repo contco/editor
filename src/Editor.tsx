@@ -10,7 +10,7 @@ import { ToolBar } from './ToolBar';
 import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
 import Leaf from './plugins/Leaf';
-import withBlockID from './Helpers/withBlockID';
+import withBlockID from './plugins/withBlockID';
 
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';

@@ -9,7 +9,7 @@ const withBlockID = (editor: any) => {
     if (operation.type === 'insert_node' && operation.path.length === 1) {
       let idToUse = newUUID;
       if (localEditor.removedIDs.has(operation.id)) {
-        idToUse = operation.id;
+        idToUse = operation.properties.id;
         localEditor.removedIDs.delete(idToUse);
       }
       return apply({
