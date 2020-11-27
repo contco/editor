@@ -4,12 +4,7 @@ const getParagraphText = (textNode: any) => {
   if ('type' in textNode && textNode.type === 'link') {
     return textNode.children[0].text;
   }
-  console.log('textNode', textNode);
-  if ('type' in textNode && textNode.type === 'list-item') {
-    for (let i = 0; i < textNode.children.length; i += 1) {
-      return textNode.children[i].text;
-    }
-  }
+
   return textNode.text;
 };
 
@@ -17,19 +12,19 @@ const getParagraphProperties = (textNode: any) => {
   const properties = [];
   if ('type' in textNode && textNode.type === 'link') {
     properties.push('a', textNode.url);
-  } else if ('type' in textNode && textNode.type === 'list-item') {
-    for (let i = 0; i < textNode.children.length; i += 1) {
-      console.log('textNode.children[i]', textNode.children[i]);
-      if (textNode.children[i].bold) {
-        properties.push('b', textNode.children[i].text);
-      }
-      if (textNode.children[i].italic) {
-        properties.push('i');
-      }
-      if (textNode.children[i].underlined) {
-        properties.push('u');
-      }
-    }
+    // } else if ('type' in textNode && textNode.type === 'list-item') {
+    //   for (let i = 0; i < textNode.children.length; i += 1) {
+    //     console.log('textNode.children[i]', textNode.children[i]);
+    //     if (textNode.children[i].bold) {
+    //       properties.push('b', textNode.children[i].text);
+    //     }
+    //     if (textNode.children[i].italic) {
+    //       properties.push('i');
+    //     }
+    //     if (textNode.children[i].underlined) {
+    //       properties.push('u');
+    //     }
+    //   }
   } else if (textNode.code) {
     properties.push('code');
   } else {
@@ -60,8 +55,22 @@ const serializeParagraph = (paragraphNode: any, textType: string) => {
     const properties = getParagraphProperties(childNodes);
     return { text, properties };
   });
+
   const paragraphBlock = checkIdAndReturnBlock(textType, document, paragraphNode);
   return paragraphBlock;
+};
+
+const serializeListing = (lisitNode: any, listType: string) => {
+  const List: any = { children: [] };
+  List.children = [];
+  for (let i = 0; i < lisitNode.children.length; i += 1) {
+    List.children.push(serializeParagraph(lisitNode.children[i], 'list-item'));
+  }
+  List.type = listType;
+  console.log(List);
+
+  const listBlock = checkIdAndReturnBlock(listType, document, lisitNode);
+  return listBlock;
 };
 
 const serializeHeading = (headingNode: any, headingType: string) => {
@@ -74,7 +83,6 @@ const serializeHeading = (headingNode: any, headingType: string) => {
 };
 
 const serialize = (slateNodesList: any) => {
-  const numberList: any = { blocks: [] };
   const serializedBlocks = slateNodesList.map((node: any) => {
     switch (node.type) {
       case 'paragraph':
@@ -82,12 +90,7 @@ const serialize = (slateNodesList: any) => {
       case 'block-quote':
         return serializeParagraph(node, 'block-quote');
       case 'numbered-list':
-        numberList.blocks = [];
-        for (let i = 0; i < node.children.length; i += 1) {
-          numberList.blocks.push(serializeParagraph(node.children[i], 'list-item'));
-        }
-        numberList.type = 'numbered-list';
-        return numberList;
+        return serializeListing(node, 'numbered-list');
       case 'bulleted-list':
         return serializeParagraph(node, 'bulleted-list');
       case 'heading-one':
