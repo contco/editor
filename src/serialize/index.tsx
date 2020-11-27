@@ -12,19 +12,6 @@ const getParagraphProperties = (textNode: any) => {
   const properties = [];
   if ('type' in textNode && textNode.type === 'link') {
     properties.push('a', textNode.url);
-    // } else if ('type' in textNode && textNode.type === 'list-item') {
-    //   for (let i = 0; i < textNode.children.length; i += 1) {
-    //     console.log('textNode.children[i]', textNode.children[i]);
-    //     if (textNode.children[i].bold) {
-    //       properties.push('b', textNode.children[i].text);
-    //     }
-    //     if (textNode.children[i].italic) {
-    //       properties.push('i');
-    //     }
-    //     if (textNode.children[i].underlined) {
-    //       properties.push('u');
-    //     }
-    //   }
   } else if (textNode.code) {
     properties.push('code');
   } else {
@@ -61,15 +48,17 @@ const serializeParagraph = (paragraphNode: any, textType: string) => {
 };
 
 const serializeListing = (lisitNode: any, listType: string) => {
-  const List: any = { children: [] };
-  List.children = [];
-  for (let i = 0; i < lisitNode.children.length; i += 1) {
-    List.children.push(serializeParagraph(lisitNode.children[i], 'list-item'));
-  }
-  List.type = listType;
-  console.log(List);
+  const children = [];
+  const { _id } = lisitNode;
 
-  const listBlock = checkIdAndReturnBlock(listType, document, lisitNode);
+  for (let i = 0; i < lisitNode.children.length; i += 1) {
+    children.push(serializeParagraph(lisitNode.children[i], 'list-item'));
+  }
+  const listBlock = { block: { children, type: listType } };
+  if (_id) {
+    listBlock.block._id = _id;
+  }
+
   return listBlock;
 };
 
@@ -92,7 +81,7 @@ const serialize = (slateNodesList: any) => {
       case 'numbered-list':
         return serializeListing(node, 'numbered-list');
       case 'bulleted-list':
-        return serializeParagraph(node, 'bulleted-list');
+        return serializeListing(node, 'bulleted-list');
       case 'heading-one':
       case 'heading-two':
         return serializeHeading(node, node.type);
