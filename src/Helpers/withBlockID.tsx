@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const withUUID = (editor: any) => {
+const withBlockID = (editor: any) => {
   const localEditor = editor;
   const { apply } = localEditor;
   localEditor.removedIDs = new Set();
@@ -36,4 +36,4 @@ const withUUID = (editor: any) => {
   };
   return localEditor;
 };
-export default withUUID;
+export default withBlockID;

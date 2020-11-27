@@ -10,7 +10,7 @@ import { ToolBar } from './ToolBar';
 import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
 import Leaf from './plugins/Leaf';
-import withUUID from './Helpers/withUUID';
+import withBlockID from './Helpers/withBlockID';
 
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';
@@ -28,7 +28,7 @@ interface Props {
 }
 const Editor: (props: Props) => any = ({ data, setContent, setActiveBlock, readOnly = false }) => {
   const [editorData, setData] = useState([]);
-  const withPlugins = [withReact, withHistory, withLinks, withUUID] as const;
+  const withPlugins = [withReact, withHistory, withLinks, withBlockID] as const;
   const editor: any = useMemo(() => pipe(createEditor(), ...withPlugins), []);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
