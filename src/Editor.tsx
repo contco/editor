@@ -14,6 +14,7 @@ import withBlockID from './plugins/withBlockID';
 
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';
+import { ADD, UPDATE, DELETE } from './constant/operations';
 
 const lodash = require('lodash');
 
@@ -47,19 +48,19 @@ const Editor: (props: Props) => any = ({ data, setContent, setActiveBlock, readO
     if (nData.length > oData.length) {
       const createdBlock = lodash.differenceWith(nData, oData, lodash.isEqual);
       activeBlock.blocks = createdBlock;
-      activeBlock.operation = 'add';
+      activeBlock.operation = ADD;
     }
     // delete
     else if (nData.length < oData.length) {
       const deletedBlock = lodash.differenceWith(oData, nData, lodash.isEqual);
       activeBlock.blocks = deletedBlock;
-      activeBlock.operation = 'delete';
+      activeBlock.operation = DELETE;
     }
     // update
     else {
       const changeInBlock = lodash.differenceWith(nData, oData, lodash.isEqual);
       activeBlock.blocks = changeInBlock;
-      if (activeBlock.blocks.length) activeBlock.operation = 'update';
+      if (activeBlock.blocks.length) activeBlock.operation = UPDATE;
     }
     setActiveBlock(activeBlock);
     setData(newData);
