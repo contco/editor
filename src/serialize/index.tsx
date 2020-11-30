@@ -49,15 +49,15 @@ const serializeParagraph = (paragraphNode: any, textType: string) => {
 
 const serializeListing = (lisitNode: any, listType: string) => {
   const children = [];
-  const { _id } = lisitNode;
+  // const { _id } = lisitNode;
 
   for (let i = 0; i < lisitNode.children.length; i += 1) {
     children.push(serializeParagraph(lisitNode.children[i], 'list-item'));
   }
   const listBlock = { block: { children, type: listType } };
-  if (_id) {
-    listBlock.block._id = _id;
-  }
+  // if (_id) {
+  //   listBlock.block._id = _id;
+  // }
 
   return listBlock;
 };

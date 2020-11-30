@@ -65,12 +65,18 @@ const deserialization = (blockContentList: any) => {
       for (let ii = 0; ii < sub.length; ii = +1) {
         const substate = sub[ii].block.properties;
         for (let jj = 0; jj < substate.document.length; jj += 1) {
-          document.push({ text: substate.document[jj].text, bold: true });
+          const props: any = {};
+          if (substate.document[jj].properties.includes('b')) props.bold = true;
+          if (substate.document[jj].properties.includes('u')) props.underlined = true;
+          if (substate.document[jj].properties.includes('i')) props.italic = true;
+          if (substate.document[jj].properties.includes('code')) props.code = true;
+
+          document.push({ text: substate.document[jj].text, ...props, type: 'list-item' });
         }
-        // console.log(substate);
-        state.push({ _id: block._id, children: document, type: 'list-item' });
+        state.push({ _id: block._id, children: document, type: block.type });
       }
-      // console.log(state);
+      console.log(state);
+      return { state, type: block.type };
     }
 
     return { _id: block._id, type, children };
