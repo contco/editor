@@ -17,7 +17,7 @@ const App = () => {
 const blockInitalValue = [
   {
     block: {
-      _id: '1',
+      _id: '0',
       type: 'heading-one',
       properties: {
         document: [
@@ -31,7 +31,7 @@ const blockInitalValue = [
   },
   {
     block: {
-      _id: '2',
+      _id: '1',
       type: 'heading-two',
       properties: {
         document: [
@@ -45,7 +45,7 @@ const blockInitalValue = [
   },
   {
     block: {
-      _id: '3',
+      _id: '2',
       type: 'block-quote',
       properties: {
         document: [
@@ -59,7 +59,7 @@ const blockInitalValue = [
   },
   {
     block: {
-      _id: '4',
+      _id: '3',
       type: 'text',
       properties: {
         document: [
@@ -75,12 +75,28 @@ const blockInitalValue = [
   },
   {
     block: {
-      _id: '5',
+      _id: '4',
       type: 'numbered-list',
       children: [
         {
           block: {
-            _id: '4',
+            _id: '1',
+            type: 'list-item',
+            properties: {
+              document: [
+                { text: 'This is editable, ', properties: [] },
+                { text: 'rich ', properties: ['b'] },
+                { text: 'text', properties: ['b', 'u'] },
+                { text: ', much ', properties: ['b', 'i'] },
+                { text: 'better than a', properties: [] },
+                { text: 'Hello World', properties: ['code'] },
+              ],
+            },
+          },
+        },
+        {
+          block: {
+            _id: '2',
             type: 'list-item',
             properties: {
               document: [
@@ -99,7 +115,7 @@ const blockInitalValue = [
   },
   {
     block: {
-      _id: '6',
+      _id: '5',
       type: 'bulleted-list',
       children: [
         {

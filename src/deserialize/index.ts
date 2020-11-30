@@ -58,10 +58,10 @@ const deserialization = (blockContentList: any) => {
     const type = getNodeType(block.type);
     const sub = block.children;
     if (block.type === 'numbered-list' || block.type === 'bulleted-list') {
-      const state: any = [];
+      const subChild: any = [];
       const document: any = [];
 
-      for (let ii = 0; ii < sub.length; ii = +1) {
+      for (let ii = 0; ii < sub.length; ii += 1) {
         const substate = sub[ii].block.properties;
         for (let jj = 0; jj < substate.document.length; jj += 1) {
           const props: any = {};
@@ -69,12 +69,13 @@ const deserialization = (blockContentList: any) => {
           if (substate.document[jj].properties.includes('u')) props.underlined = true;
           if (substate.document[jj].properties.includes('i')) props.italic = true;
           if (substate.document[jj].properties.includes('code')) props.code = true;
-
-          document.push({ text: substate.document[jj].text, ...props, type: 'list-item' });
+          document.push({ text: substate.document[jj].text, ...props });
         }
-        state.push({ _id: block._id, children: document, type: block.type });
+        subChild.push({ _id: block._id, children: document, type: 'list-item' });
       }
-      // console.log(state);
+
+      const state = { _id: block._id, children: subChild, type: block.type };
+      console.log(state);
       return state;
     }
 
