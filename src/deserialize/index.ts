@@ -12,7 +12,6 @@ const getNodeType = (blockType: string) => {
 const getChildNodes = (block: any) => {
   if (block && 'properties' in block && 'document' in block.properties) {
     const blockDocumentsList = block.properties.document;
-    // console.log(blockDocumentsList, block.type, ':::::::');
     const childNodes = blockDocumentsList.map((propertyBlock: any) => {
       const { properties, text } = propertyBlock;
       if (properties.length === 0) {
@@ -76,7 +75,7 @@ const deserialization = (blockContentList: any) => {
         state.push({ _id: block._id, children: document, type: block.type });
       }
       console.log(state);
-      return { state, type: block.type };
+      return state;
     }
 
     return { _id: block._id, type, children };
