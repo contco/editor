@@ -74,7 +74,7 @@ const deserialization = (blockContentList: any) => {
         }
         state.push({ _id: block._id, children: document, type: block.type });
       }
-      console.log(state);
+      // console.log(state);
       return state;
     }
 
