@@ -20,7 +20,6 @@ import { ADD, UPDATE, DELETE } from './constant/operations';
 interface Props {
   data?: any;
   onContentUpdate: (content: any) => void;
-  setActiveBlock: (active: any) => void;
   initialData?: any;
   readOnly?: boolean;
   attributes?: any;
