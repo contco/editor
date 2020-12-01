@@ -56,6 +56,7 @@ const serializeListing = (lisitNode: any, listType: string) => {
   }
   const listBlock = { block: { children, type: listType } };
   if (_id) {
+    
     listBlock.block['_id'] = _id;
 
   }
