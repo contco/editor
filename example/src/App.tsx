@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Editor } from 'editor';
 
 const App = () => {
-  const [document, setDocument] = useState<any>(blockInitalValue);
-  const [activeBlock, setActiveBlock] = useState<any>([]);
-  const setContent = (content: any) => {
-    setDocument(content);
+  const [document, setDocument] = useState<any>([]);
+
+  useEffect(() => {
+    setDocument(blockInitalValue);
+  }, []);
+
+  const onContentUpdate = (content: any) => {
+    console.log(content);
   };
   console.log(document);
-  console.log('activeBlock', activeBlock);
   return (
     <>
-      <Editor data={blockInitalValue} setContent={setContent} setActiveBlock={setActiveBlock} />
+      <Editor data={blockInitalValue} onContentUpdate={onContentUpdate} />
     </>
   );
 };
