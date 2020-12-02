@@ -56,7 +56,7 @@ const deserialization = (blockContentList: any) => {
     const { block } = blockContent;
     const children = getChildNodes(block);
     const type = getNodeType(block.type);
-    return { _id: block._id, type, children };
+    return { id: block._id, type, children };
   });
   return deserializedContent;
 };
