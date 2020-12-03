@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Editor } from 'editor';
+import { Editor, DocumentViewer } from 'editor';
 
 const App = () => {
   const [document, setDocument] = useState<any>([]);
@@ -15,6 +15,7 @@ const App = () => {
   return (
     <>
       <Editor data={blockInitalValue} onContentUpdate={onContentUpdate} />
+      <DocumentViewer data={blockInitalValue} />
     </>
   );
 };
