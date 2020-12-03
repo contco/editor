@@ -75,6 +75,7 @@ const blockInitalValue = [
           { text: ', much ', properties: ['b', 'i'] },
           { text: 'better than a', properties: [] },
           { text: 'Hello World', properties: ['code'] },
+          { text: 'link check', properties: ['a', 'https://google.com'] },
         ],
       },
     },

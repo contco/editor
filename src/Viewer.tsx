@@ -1,8 +1,14 @@
 /* eslint no-underscore-dangle: "off" */
 import * as React from 'react';
 import Code from './plugins/LeafStyle';
-import { Paragraph, BlockQuote } from './plugins/ElementStyle';
-import { PROPERTY_BOLD, PROPERTY_ITALIC, PROPERTY_CODE, PROPERTY_UNDERLINED } from './constant/propertyType';
+import { Paragraph, BlockQuote, Link, LinkContainer, Triangle, Rectangle } from './plugins/ElementStyle';
+import {
+  PROPERTY_BOLD,
+  PROPERTY_ITALIC,
+  PROPERTY_CODE,
+  PROPERTY_UNDERLINED,
+  PROPERTY_LINK,
+} from './constant/propertyType';
 import { HEADING1, HEADING2, TEXT, BLOCK_QUOTE } from './constant/blockType';
 
 interface ViewerProps {
@@ -12,7 +18,7 @@ interface ViewerProps {
 const Viewer: (props: ViewerProps) => any = ({ data }) => {
   const renderProperty = (properties: string[], text: any) => {
     let textWithProperty = text;
-    properties.forEach((p) => {
+    properties.forEach((p, index) => {
       switch (p) {
         case PROPERTY_BOLD:
           textWithProperty = <b> {textWithProperty} </b>;
@@ -25,6 +31,18 @@ const Viewer: (props: ViewerProps) => any = ({ data }) => {
           break;
         case PROPERTY_CODE:
           textWithProperty = <Code> {textWithProperty} </Code>;
+          break;
+        case PROPERTY_LINK:
+          textWithProperty = (
+            <Link>
+              {' '}
+              {textWithProperty}
+              <LinkContainer>
+                <Triangle />
+                <Rectangle>{properties[index + 1]}</Rectangle>
+              </LinkContainer>
+            </Link>
+          );
           break;
         default:
           textWithProperty = <span> {textWithProperty}</span>;
