@@ -77,6 +77,6 @@ const Viewer: (props: ViewerProps) => any = ({ data }) => {
     });
     return render;
   };
-  return <>{renderBlock()}</>;
+  return <div>{renderBlock()}</div>;
 };
 export default Viewer;
