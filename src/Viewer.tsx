@@ -13,9 +13,10 @@ import { HEADING1, HEADING2, TEXT, BLOCK_QUOTE } from './constant/blockType';
 
 interface ViewerProps {
   data?: any;
+  className?: string;
 }
 
-const Viewer: (props: ViewerProps) => any = ({ data }) => {
+const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
   const renderProperty = (properties: string[], text: any) => {
     let textWithProperty = text;
     properties.forEach((p, index) => {
@@ -95,6 +96,6 @@ const Viewer: (props: ViewerProps) => any = ({ data }) => {
     });
     return render;
   };
-  return <div>{renderBlock()}</div>;
+  return <div className={className}>{renderBlock()}</div>;
 };
 export default Viewer;
