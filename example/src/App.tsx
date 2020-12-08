@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Editor } from 'editor';
+import { Editor, Viewer } from 'editor';
 
 const App = () => {
   const [document, setDocument] = useState<any>([]);
@@ -15,6 +15,7 @@ const App = () => {
   return (
     <>
       <Editor data={blockInitalValue} onContentUpdate={onContentUpdate} />
+      <Viewer data={blockInitalValue} />
     </>
   );
 };
@@ -28,7 +29,7 @@ const blockInitalValue = [
         document: [
           {
             text: '  Heading One',
-            properties: [],
+            properties: ['i', 'u'],
           },
         ],
       },
@@ -74,6 +75,7 @@ const blockInitalValue = [
           { text: ', much ', properties: ['b', 'i'] },
           { text: 'better than a', properties: [] },
           { text: 'Hello World', properties: ['code'] },
+          { text: 'link check', properties: ['a', 'https://google.com'] },
         ],
       },
     },
