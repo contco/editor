@@ -57,7 +57,6 @@ const blockInitalValue = [
         document: [
           {
             text: 'What Goes Around Comes Around',
-            properties: [],
           },
         ],
       },
@@ -73,7 +72,7 @@ const blockInitalValue = [
           { text: 'rich ', properties: ['b'] },
           { text: 'text', properties: ['b', 'u'] },
           { text: ', much ', properties: ['b', 'i'] },
-          { text: 'better than a', properties: [] },
+          { text: 'better than a' },
           { text: 'Hello World', properties: ['code'] },
           { text: 'link check', properties: ['a', 'https://google.com'] },
         ],
