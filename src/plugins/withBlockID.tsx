@@ -6,8 +6,12 @@ const withBlockID = (editor: any) => {
   localEditor.removedIDs = new Set();
   localEditor.apply = (operation: any) => {
     const newUUID = uuidv4();
+    const hex = `0x${newUUID.replace(/-/g, '')}`;
+    const value = BigInt(hex);
+    const decimal = value.toString();
+
     if (operation.type === 'insert_node' && operation.path.length === 1) {
-      let idToUse = newUUID;
+      let idToUse = decimal;
       if (localEditor.removedIDs.has(operation.id)) {
         idToUse = operation.properties.id;
         localEditor.removedIDs.delete(idToUse);
@@ -18,7 +22,7 @@ const withBlockID = (editor: any) => {
       });
     }
     if (operation.type === 'split_node' && operation.path.length === 1) {
-      let idToUse = newUUID;
+      let idToUse = decimal;
       if (localEditor.removedIDs.has(operation.id)) {
         idToUse = operation.id;
         localEditor.removedIDs.delete(idToUse);
