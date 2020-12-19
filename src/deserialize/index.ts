@@ -14,11 +14,11 @@ const getChildNodes = (block: any) => {
     const blockDocumentsList = block.properties.document;
     const childNodes = blockDocumentsList.map((propertyBlock: any) => {
       const { properties, text } = propertyBlock;
-      if (properties.length === 0) {
+      if ((properties !== undefined && properties.length === 0) || properties === undefined) {
         return { text };
       }
       let childObject: any = { text };
-      Object.keys(properties).forEach((property) => {
+      properties.forEach((property: string) => {
         if (property === 'a') {
           childObject = {
             type: 'link',
