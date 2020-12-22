@@ -59,7 +59,9 @@ const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
         return (
           <h1 key={block.block._id}>
             {block.block.properties.document.map((document: any) => (
-              <span key={document.text}>{renderProperty(document.properties, document.text)}</span>
+              <span key={document.text}>
+                {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
+              </span>
             ))}
           </h1>
         );
@@ -68,7 +70,9 @@ const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
         return (
           <h2 key={block.block._id}>
             {block.block.properties.document.map((document: any) => (
-              <span key={document.text}>{renderProperty(document.properties, document.text)}</span>
+              <span key={document.text}>
+                {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
+              </span>
             ))}
           </h2>
         );
@@ -77,7 +81,9 @@ const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
         return (
           <Paragraph key={block.block._id}>
             {block.block.properties.document.map((document: any) => (
-              <span key={document.text}>{renderProperty(document.properties, document.text)}</span>
+              <span key={document.text}>
+                {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
+              </span>
             ))}
           </Paragraph>
         );
@@ -86,7 +92,9 @@ const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
         return (
           <BlockQuote key={block.block._id}>
             {block.block.properties.document.map((document: any) => (
-              <span key={document.text}>{renderProperty(document.properties, document.text)}</span>
+              <span key={document.text}>
+                {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
+              </span>
             ))}
           </BlockQuote>
         );
