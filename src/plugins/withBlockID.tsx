@@ -7,7 +7,6 @@ const withBlockID = (editor: any) => {
   localEditor.apply = (operation: any) => {
     const nanoid = customAlphabet('1234567890', 18);
     const nanoID = nanoid();
-    console.log(nanoID);
     if (operation.type === 'insert_node' && operation.path.length === 1) {
       let idToUse = nanoID;
       if (localEditor.removedIDs.has(operation.id)) {
