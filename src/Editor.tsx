@@ -35,7 +35,7 @@ const Editor: (props: Props) => any = ({ data, onContentUpdate, readOnly = false
   useEffect(() => {
     const initialData = deserialize(data);
     setData(initialData);
-  }, []);
+  }, [data]);
 
   const sendContentToApp = (nodeData: any, operation: string) => {
     if (!isEmpty(nodeData)) {
