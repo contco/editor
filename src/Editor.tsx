@@ -16,6 +16,7 @@ import withBlockID from './plugins/withBlockID';
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';
 import { ADD, UPDATE, DELETE } from './constant/operations';
+import EMPTY_NODE from './constant/emptyNode';
 
 interface Props {
   data?: any;
@@ -25,17 +26,20 @@ interface Props {
   attributes?: any;
   element?: any;
 }
+
 const Editor: (props: Props) => any = ({ data, onContentUpdate, readOnly = false }) => {
-  const [editorData, setData] = useState([]);
+  const [editorData, setData] = useState(EMPTY_NODE);
   const withPlugins = [withReact, withHistory, withLinks, withBlockID] as const;
   const editor: any = useMemo(() => pipe(createEditor(), ...withPlugins), []);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
   useEffect(() => {
-    const initialData = deserialize(data);
-    setData(initialData);
-  }, []);
+    if (data.length) {
+      const initialData = deserialize(data);
+      setData(initialData);
+    }
+  }, [data]);
 
   const sendContentToApp = (nodeData: any, operation: string) => {
     if (!isEmpty(nodeData)) {
