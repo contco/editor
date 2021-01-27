@@ -1,9 +1,12 @@
+/* eslint no-underscore-dangle:off */
 import * as React from 'react';
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { createEditor } from 'slate';
+import { createEditor, Node } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import isHotkey from 'is-hotkey';
 import { withHistory } from 'slate-history';
+import { pipe } from '@udecode/slate-plugins';
+import { differenceBy, differenceWith, isEmpty, isEqual } from 'lodash';
 import { ToggleMark } from './Helpers/MarkHelper';
 import HOTKEYS from './Helpers/HotKeys';
 
@@ -11,22 +14,24 @@ import { ToolBar } from './ToolBar';
 import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
 import Leaf from './plugins/Leaf';
+import withBlockID from './plugins/withBlockID';
 
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';
+import { ADD, UPDATE, DELETE } from './constant/operations';
 
 interface Props {
   data?: any;
-  setContent: (content: any) => void;
+  onContentUpdate: (content: any) => void;
   initialData?: any;
   readOnly?: boolean;
   attributes?: any;
   element?: any;
 }
-
-const Editor: (props: Props) => any = ({ data, setContent, readOnly = false }) => {
+const Editor: (props: Props) => any = ({ data, onContentUpdate, readOnly = false }) => {
   const [editorData, setData] = useState([]);
-  const editor = useMemo(() => withLinks(withHistory(withReact(createEditor()))), []);
+  const withPlugins = [withReact, withHistory, withLinks, withBlockID] as const;
+  const editor: any = useMemo(() => pipe(createEditor(), ...withPlugins), []);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
 
@@ -35,9 +40,23 @@ const Editor: (props: Props) => any = ({ data, setContent, readOnly = false }) =
     setData(initialData);
   }, []);
 
+  const sendContentToApp = (nodeData: any, operation: string) => {
+    if (!isEmpty(nodeData)) {
+      const type = nodeData.length === 1 ? 'single' : 'multi';
+      const activeObject = { data: serialize(nodeData), type, operation };
+      onContentUpdate(activeObject);
+    }
+  };
+
   const onChangeContent = (newData: any) => {
+    const createdBlocks = differenceBy(newData, editorData, (item: Node) => item.id);
+    sendContentToApp(createdBlocks, ADD);
+    const deletedBlocks = differenceBy(editorData, newData, (item: Node) => item.id);
+    sendContentToApp(deletedBlocks, DELETE);
+    const allModifiedBlocks = differenceWith(newData, editorData, isEqual);
+    const updatedBlocks = differenceBy(allModifiedBlocks, createdBlocks, (item: Node) => item.id);
+    sendContentToApp(updatedBlocks, UPDATE);
     setData(newData);
-    setContent(serialize(newData));
   };
 
   return (

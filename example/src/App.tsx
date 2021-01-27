@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
-import { Editor } from 'editor';
+import React, { useState, useEffect } from 'react';
+import { Editor, Viewer } from 'editor';
 
 const App = () => {
-  const [document, setDocument] = useState<any>(blockInitalValue);
-  const setContent = (content: any) => {
-    setDocument(content);
+  const [document, setDocument] = useState<any>([]);
+
+  useEffect(() => {
+    setDocument(blockInitalValue);
+  }, []);
+
+  const onContentUpdate = (content: any) => {
+    console.log(content);
   };
   console.log(document);
   return (
     <>
-      <Editor data={blockInitalValue} setContent={setContent} readOnly={false} />
+      <Editor data={blockInitalValue} onContentUpdate={onContentUpdate} />
+      <Viewer data={blockInitalValue} />
     </>
   );
 };
@@ -17,13 +23,13 @@ const App = () => {
 const blockInitalValue = [
   {
     block: {
-      _id: '0',
+      _id: '1',
       type: 'heading-one',
       properties: {
         document: [
           {
             text: '  Heading One',
-            properties: [],
+            properties: ['i', 'u'],
           },
         ],
       },
@@ -31,7 +37,7 @@ const blockInitalValue = [
   },
   {
     block: {
-      _id: '1',
+      _id: '2',
       type: 'heading-two',
       properties: {
         document: [
@@ -45,13 +51,12 @@ const blockInitalValue = [
   },
   {
     block: {
-      _id: '2',
+      _id: '3',
       type: 'block-quote',
       properties: {
         document: [
           {
             text: 'What Goes Around Comes Around',
-            properties: [],
           },
         ],
       },
@@ -59,7 +64,7 @@ const blockInitalValue = [
   },
   {
     block: {
-      _id: '3',
+      _id: '4',
       type: 'text',
       properties: {
         document: [
@@ -67,8 +72,9 @@ const blockInitalValue = [
           { text: 'rich ', properties: ['b'] },
           { text: 'text', properties: ['b', 'u'] },
           { text: ', much ', properties: ['b', 'i'] },
-          { text: 'better than a', properties: [] },
+          { text: 'better than a' },
           { text: 'Hello World', properties: ['code'] },
+          { text: 'link check', properties: ['a', 'https://google.com'] },
         ],
       },
     },
