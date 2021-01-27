@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Editor, Viewer } from 'editor';
 
 const App = () => {
-  const [document, setDocument] = useState<any>([]);
+  const [document, setDocument] = useState<any>(blockInitalValue1);
 
   useEffect(() => {
-    setDocument(blockInitalValue);
+    setDocument(blockInitalValue2);
   }, []);
 
   const onContentUpdate = (content: any) => {
@@ -14,13 +14,29 @@ const App = () => {
   console.log(document);
   return (
     <>
-      <Editor data={blockInitalValue} onContentUpdate={onContentUpdate} />
-      <Viewer data={blockInitalValue} />
+      <Editor data={document} onContentUpdate={onContentUpdate} />
+      <Viewer data={document} />
     </>
   );
 };
-
-const blockInitalValue = [
+const blockInitalValue1 = [
+  {
+    block: {
+      _id: '',
+      type: 'text',
+      properties: {
+        document: [
+          {
+            text: '',
+            properties: [],
+          },
+        ],
+      },
+      createdBy: '',
+    },
+  },
+];
+const blockInitalValue2 = [
   {
     block: {
       _id: '1',
