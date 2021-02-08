@@ -41,17 +41,20 @@ const Editor: (props: Props) => any = ({ data, onContentUpdate, readOnly = false
     }
   }, [data]);
 
-  const sendContentToApp = (nodeData: any, operation: string) => {
+  const sendContentToApp = (nodeData: any, operation: string, position: number = 0) => {
     if (!isEmpty(nodeData)) {
       const type = nodeData.length === 1 ? 'single' : 'multi';
-      const activeObject = { data: serialize(nodeData), type, operation };
+      const activeObject = { data: serialize(nodeData), type, operation, position };
       onContentUpdate(activeObject);
     }
   };
 
   const onChangeContent = (newData: any) => {
     const createdBlocks = differenceBy(newData, editorData, (item: Node) => item.id);
-    sendContentToApp(createdBlocks, ADD);
+    if (!isEmpty(createdBlocks)) {
+      const position = newData.findIndex((item: Node) => item.id === createdBlocks[0].id);
+      sendContentToApp(createdBlocks, ADD, position);
+    }
     const deletedBlocks = differenceBy(editorData, newData, (item: Node) => item.id);
     sendContentToApp(deletedBlocks, DELETE);
     const allModifiedBlocks = differenceWith(newData, editorData, isEqual);
