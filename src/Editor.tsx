@@ -3,10 +3,13 @@ import * as React from 'react';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { createEditor, Node } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
-
+import isHotkey from 'is-hotkey';
 import { withHistory } from 'slate-history';
 import { pipe } from '@udecode/slate-plugins';
 import { differenceBy, differenceWith, isEmpty, isEqual } from 'lodash';
+import { ToggleMark } from './Helpers/MarkHelper';
+import HOTKEYS from './Helpers/HotKeys';
+
 import { ToolBar } from './ToolBar';
 import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
@@ -65,7 +68,20 @@ const Editor: (props: Props) => any = ({ data, onContentUpdate, readOnly = false
   return (
     <Slate editor={editor} value={editorData} onChange={(newValue: any) => onChangeContent(newValue)}>
       <ToolBar />
-      <Editable renderElement={renderElement} renderLeaf={renderLeaf} readOnly={readOnly} />
+      <Editable
+        renderElement={renderElement}
+        renderLeaf={renderLeaf}
+        onKeyDown={(event) => {
+          Object.keys(HOTKEYS).forEach((key) => {
+            if (isHotkey(key, event as any)) {
+              event.preventDefault();
+              const mark = HOTKEYS[key];
+              ToggleMark(editor, mark);
+            }
+          });
+        }}
+        readOnly={readOnly}
+      />
     </Slate>
   );
 };

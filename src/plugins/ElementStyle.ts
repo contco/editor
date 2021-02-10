@@ -26,6 +26,17 @@ export const BlockQuote = styled.blockquote`
   color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.text : '#050b21')};
 `;
 
+export const NumberList = styled.ol`
+  font-style: normal;
+  font-size: 16px;
+  color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.text : '#050b21')};
+`;
+export const BulletList = styled.li`
+  font-style: normal;
+  font-size: 16px;
+  color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.text : '#050b21')};
+`;
+
 export const Triangle = styled.span`
   width: 0;
   height: 0;

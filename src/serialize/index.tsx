@@ -4,6 +4,7 @@ const getParagraphText = (textNode: any) => {
   if ('type' in textNode && textNode.type === 'link') {
     return textNode.children[0].text;
   }
+
   return textNode.text;
 };
 
@@ -41,8 +42,24 @@ const serializeParagraph = (paragraphNode: any, textType: string) => {
     const properties = getParagraphProperties(childNodes);
     return { text, properties };
   });
+
   const paragraphBlock = checkIdAndReturnBlock(textType, document, paragraphNode);
   return paragraphBlock;
+};
+
+const serializeListing = (lisitNode: any, listType: string) => {
+  const children = [];
+  const { _id } = lisitNode;
+
+  for (let i = 0; i < lisitNode.children.length; i += 1) {
+    children.push(serializeParagraph(lisitNode.children[i], 'list-item'));
+  }
+  const listBlock = { block: { children, type: listType } };
+  if (_id) {
+    listBlock.block._id = _id;
+  }
+
+  return listBlock;
 };
 
 const serializeHeading = (headingNode: any, headingType: string) => {
@@ -61,6 +78,10 @@ const serialize = (slateNodesList: any) => {
         return serializeParagraph(node, 'text');
       case 'block-quote':
         return serializeParagraph(node, 'block-quote');
+      case 'numbered-list':
+        return serializeListing(node, 'numbered-list');
+      case 'bulleted-list':
+        return serializeListing(node, 'bulleted-list');
       case 'heading-one':
       case 'heading-two':
         return serializeHeading(node, node.type);

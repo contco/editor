@@ -95,5 +95,69 @@ const blockInitalValue2 = [
       },
     },
   },
+  {
+    block: {
+      _id: '4',
+      type: 'numbered-list',
+      children: [
+        {
+          block: {
+            _id: '1',
+            type: 'list-item',
+            properties: {
+              document: [
+                { text: 'This is editable, ', properties: [] },
+                { text: 'rich ', properties: ['b'] },
+                { text: 'text', properties: ['b', 'u'] },
+                { text: ', much ', properties: ['b', 'i'] },
+                { text: 'better than a', properties: [] },
+                { text: 'Hello World', properties: ['code'] },
+              ],
+            },
+          },
+        },
+        {
+          block: {
+            _id: '2',
+            type: 'list-item',
+            properties: {
+              document: [
+                { text: 'This is editable, ', properties: [] },
+                { text: 'rich ', properties: ['b'] },
+                { text: 'text', properties: ['b', 'u'] },
+                { text: ', much ', properties: ['b', 'i'] },
+                { text: 'better than a', properties: [] },
+                { text: 'Hello World', properties: ['code'] },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  },
+  {
+    block: {
+      _id: '5',
+      type: 'bulleted-list',
+      children: [
+        {
+          block: {
+            _id: '4',
+            type: 'list-item',
+            properties: {
+              document: [
+                { text: 'This is editable, ', properties: [] },
+                { text: 'rich ', properties: ['b'] },
+                { text: 'text', properties: ['b', 'u'] },
+                { text: ', much ', properties: ['b', 'i'] },
+                { text: 'better than a', properties: [] },
+                { text: 'Hello World', properties: ['code'] },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  },
 ];
 export default App;

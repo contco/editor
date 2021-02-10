@@ -16,6 +16,8 @@ import { ReactComponent as Quote } from '../assets/quote.svg';
 import { ReactComponent as Underline } from '../assets/underline.svg';
 import { ReactComponent as H1 } from '../assets/h1.svg';
 import { ReactComponent as H2 } from '../assets/h2.svg';
+import { ReactComponent as numberList } from '../assets/numberList.svg';
+import { ReactComponent as bulletlist } from '../assets/bulletList.svg';
 
 export interface ToolBarProps {}
 
@@ -119,6 +121,8 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
         <BlockButton format="heading-two" icon={H2} />
         <BlockButton format="block-quote" icon={Quote} />
         <MarkButton format="code" icon={Coding} />
+        <BlockButton format="numbered-list" icon={numberList} />
+        <BlockButton format="bulleted-list" icon={bulletlist} />
       </Menu>
     </Portal>
   );
