@@ -14,7 +14,14 @@ const App = () => {
   console.log(document);
   return (
     <>
-      <Editor data={document} onContentUpdate={onContentUpdate} />
+      <div style={{ minHeight: 200 }}>
+        <Editor
+          placeholder="Click anywhere to start typing"
+          placeholderStyles={{ color: 'blue', fontWeight: 'bold' }}
+          data={document}
+          onContentUpdate={onContentUpdate}
+        />
+      </div>
       <Viewer data={document} />
     </>
   );

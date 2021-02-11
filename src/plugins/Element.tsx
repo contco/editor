@@ -4,6 +4,12 @@ import { Paragraph, CodeBlock, BlockQuote, Link, LinkContainer, Triangle, Rectan
 
 const Element: React.FC<RenderElementProps> = ({ attributes, children, element }: any) => {
   switch (element.type) {
+    case 'placeholder':
+      return (
+        <div style={{ backgroundColor: 'yellow', color: 'pink' }} {...attributes}>
+          {children}
+        </div>
+      );
     case 'paragraph':
       return <Paragraph {...attributes}>{children}</Paragraph>;
     case 'code-block':
