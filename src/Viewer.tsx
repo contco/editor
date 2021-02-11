@@ -10,6 +10,7 @@ import {
   PROPERTY_LINK,
 } from './constant/propertyType';
 import { HEADING1, HEADING2, TEXT, BLOCK_QUOTE } from './constant/blockType';
+import getShortLink from './utils/getShortLink';
 
 interface ViewerProps {
   data?: any;
@@ -40,7 +41,7 @@ const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
               {textWithProperty}
               <LinkContainer>
                 <Triangle />
-                <Rectangle>{properties[index + 1]}</Rectangle>
+                <Rectangle>{getShortLink(properties[index + 1])}</Rectangle>
               </LinkContainer>
             </Link>
           );

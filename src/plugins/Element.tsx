@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RenderElementProps } from 'slate-react';
 import { Paragraph, CodeBlock, BlockQuote, Link, LinkContainer, Triangle, Rectangle } from './ElementStyle';
+import getShortLink from '../utils/getShortLink';
 
 const Element: React.FC<RenderElementProps> = ({ attributes, children, element }: any) => {
   switch (element.type) {
@@ -26,7 +27,7 @@ const Element: React.FC<RenderElementProps> = ({ attributes, children, element }
           {children}
           <LinkContainer>
             <Triangle />
-            <Rectangle>{element?.url}</Rectangle>
+            <Rectangle>{getShortLink(element?.url)}</Rectangle>
           </LinkContainer>
         </Link>
       );
