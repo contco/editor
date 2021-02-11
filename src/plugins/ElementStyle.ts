@@ -49,6 +49,7 @@ export const Rectangle = styled.span`
 `;
 
 export const LinkContainer = styled.span`
+  z-index: 2;
   position: absolute;
   display: inline-block;
   width: max-content;

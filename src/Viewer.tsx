@@ -35,7 +35,7 @@ const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
           break;
         case PROPERTY_LINK:
           textWithProperty = (
-            <Link>
+            <Link href={properties[index + 1]} target="_blank">
               {' '}
               {textWithProperty}
               <LinkContainer>
