@@ -6,11 +6,13 @@ export const Code = styled.code`
   background: ${({ theme }) => (theme.colors !== undefined ? theme.colors.codeblock : '#050b210d')};
 `;
 
-export const Placeholder = styled.span`
-pointer-events: none;
-user-select: none,
-display: inline-block,
-width: 0,
-max-width: 100%,
-white-space: nowrap,
-`;
+export const defaultPlaceholderStyles = {
+  pointerEvents: 'none',
+  userSelect: 'none',
+  display: 'inline-block',
+  width: '0',
+  maxWidth: '100%',
+  whiteSpace: 'nowrap',
+  verticalAlign: 'text-top',
+  height: 0,
+};

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text } from 'slate';
-import { Code } from './LeafStyle';
+import { Code, defaultPlaceholderStyles } from './LeafStyle';
 
 interface PlaceholderLeaf extends Text {
   placeholder?: string;
@@ -14,17 +14,6 @@ interface CustomLeafProps {
   };
   placeholderStyles?: any;
 }
-
-const defaultPlaceholderStyle = {
-  pointerEvents: 'none',
-  userSelect: 'none',
-  display: 'inline-block',
-  width: '0',
-  maxWidth: '100%',
-  whiteSpace: 'nowrap',
-  verticalAlign: 'text-top',
-  height: 0,
-};
 
 const Leaf: React.FC<CustomLeafProps> = ({ attributes, children, leaf, placeholderStyles }) => {
   let child = children;
@@ -43,7 +32,7 @@ const Leaf: React.FC<CustomLeafProps> = ({ attributes, children, leaf, placehold
   if (leaf.placeholder) {
     return (
       <span {...attributes}>
-        <span contentEditable={false} style={{ ...placeholderStyles, ...defaultPlaceholderStyle }}>
+        <span contentEditable={false} style={{ ...placeholderStyles, ...defaultPlaceholderStyles }}>
           {leaf.placeholder}
         </span>
         <span data-slate-zero-width="n" data-slate-length="0">
