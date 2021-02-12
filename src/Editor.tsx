@@ -45,8 +45,7 @@ const Editor: (props: Props) => any = ({
   useEffect(() => {
     if (data.length) {
       const initialData = deserialize(data);
-      console.log(initialData);
-      setData(EMPTY_NODE);
+      setData(initialData);
     }
   }, [data]);
 
