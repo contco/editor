@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: "off" */
 import * as React from 'react';
-import Code from './plugins/LeafStyle';
+import { Code } from './plugins/LeafStyle';
 import { Paragraph, BlockQuote, Link, LinkContainer, Triangle, Rectangle } from './plugins/ElementStyle';
 import {
   PROPERTY_BOLD,

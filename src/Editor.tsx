@@ -25,14 +25,22 @@ interface Props {
   readOnly?: boolean;
   attributes?: any;
   element?: any;
+  placeholder?: string;
+  placeholderStyles?: any;
 }
 
-const Editor: (props: Props) => any = ({ data, onContentUpdate, readOnly = false }) => {
+const Editor: (props: Props) => any = ({
+  data,
+  onContentUpdate,
+  readOnly = false,
+  placeholder = '',
+  placeholderStyles = {},
+}) => {
   const [editorData, setData] = useState(EMPTY_NODE);
   const withPlugins = [withReact, withHistory, withLinks, withBlockID] as const;
   const editor: any = useMemo(() => pipe(createEditor(), ...withPlugins), []);
   const renderElement = useCallback((props) => <Element {...props} />, []);
-  const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
+  const renderLeaf = useCallback((props) => <Leaf {...props} placeholderStyles={placeholderStyles} />, []);
 
   useEffect(() => {
     if (data.length) {
@@ -65,7 +73,7 @@ const Editor: (props: Props) => any = ({ data, onContentUpdate, readOnly = false
   return (
     <Slate editor={editor} value={editorData} onChange={(newValue: any) => onChangeContent(newValue)}>
       <ToolBar />
-      <Editable renderElement={renderElement} renderLeaf={renderLeaf} readOnly={readOnly} />
+      <Editable placeholder={placeholder} renderElement={renderElement} renderLeaf={renderLeaf} readOnly={readOnly} />
     </Slate>
   );
 };
