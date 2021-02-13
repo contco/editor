@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Editor, Viewer } from 'editor';
+import styled from 'styled-components';
+
+const StyledEditor = styled(Editor)`
+  height: 60vh;
+  background-color: #fef9e7;
+`;
 
 const App = () => {
   const [document, setDocument] = useState<any>(blockInitalValue1);
@@ -15,7 +21,7 @@ const App = () => {
   return (
     <>
       <div style={{ minHeight: 200 }}>
-        <Editor
+        <StyledEditor
           placeholder="Click anywhere to start typing"
           placeholderStyles={{ color: 'blue', fontWeight: 'bold' }}
           data={document}

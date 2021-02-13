@@ -27,6 +27,7 @@ interface Props {
   element?: any;
   placeholder?: string;
   placeholderStyles?: any;
+  className?: string;
 }
 
 const Editor: (props: Props) => any = ({
@@ -35,6 +36,7 @@ const Editor: (props: Props) => any = ({
   readOnly = false,
   placeholder = '',
   placeholderStyles = {},
+  className,
 }) => {
   const [editorData, setData] = useState(EMPTY_NODE);
   const withPlugins = [withReact, withHistory, withLinks, withBlockID] as const;
@@ -73,7 +75,13 @@ const Editor: (props: Props) => any = ({
   return (
     <Slate editor={editor} value={editorData} onChange={(newValue: any) => onChangeContent(newValue)}>
       <ToolBar />
-      <Editable placeholder={placeholder} renderElement={renderElement} renderLeaf={renderLeaf} readOnly={readOnly} />
+      <Editable
+        className={className}
+        placeholder={placeholder}
+        renderElement={renderElement}
+        renderLeaf={renderLeaf}
+        readOnly={readOnly}
+      />
     </Slate>
   );
 };
