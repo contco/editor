@@ -15,9 +15,14 @@ const isBlockActive = (editor: ReactEditor, format: string) => {
 export const ToggleBlock = (editor: ReactEditor, format: string) => {
   const isActive = isBlockActive(editor, format);
 
-  Transforms.setNodes(editor, {
-    type: isActive ? 'paragraph' : format,
-  });
+  if (format === 'clear-format') {
+    console.log('clear-format');
+    Editor.removeMark(editor, format);
+  } else {
+    Transforms.setNodes(editor, {
+      type: isActive ? 'paragraph' : format,
+    });
+  }
 };
 
 // Block Button
