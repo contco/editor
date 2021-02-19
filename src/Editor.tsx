@@ -12,7 +12,7 @@ import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
 import Leaf from './plugins/Leaf';
 import withBlockID from './plugins/withBlockID';
-
+import withBreak from './plugins/withBreak';
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';
 import { ADD, UPDATE, DELETE } from './constant/operations';
@@ -39,7 +39,7 @@ const Editor: (props: Props) => any = ({
   className,
 }) => {
   const [editorData, setData] = useState(EMPTY_NODE);
-  const withPlugins = [withReact, withHistory, withLinks, withBlockID] as const;
+  const withPlugins = [withReact, withHistory, withLinks, withBlockID, withBreak] as const;
   const editor: any = useMemo(() => pipe(createEditor(), ...withPlugins), []);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} placeholderStyles={placeholderStyles} />, []);
@@ -72,6 +72,27 @@ const Editor: (props: Props) => any = ({
     setData(newData);
   };
 
+  // const handleOnnKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+  //   console.log(`event`, event);
+  //   console.log('editor(handleOnnKeyDown)---> ', editor);
+  //   if (!event.ctrlKey && event.keyCode === 13) {
+  //     if (event.shiftKey) {
+  //       // "Shift+Enter" inserts a new line
+  //       event.preventDefault()
+  //       editor.insertNewLine(editor)
+  //       return
+  //     } else {
+  //       const selectionParent = Node.parent(editor, editor.selection!.anchor.path)
+  //       const parentString = Node.string(selectionParent)
+  //       if (parentString === '' && selectionParent.type !== 'paragraph') {
+  //         // "Enter" within an empty Node resets that Node to "paragraph"
+  //         event.preventDefault()
+  //         editor.resetToParagraph(editor)
+  //         return
+  //       }
+  //     }
+  //   }
+  // }
   return (
     <Slate editor={editor} value={editorData} onChange={(newValue: any) => onChangeContent(newValue)}>
       <ToolBar />
@@ -81,6 +102,7 @@ const Editor: (props: Props) => any = ({
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         readOnly={readOnly}
+        // onKeyDown={handleOnnKeyDown}
       />
     </Slate>
   );

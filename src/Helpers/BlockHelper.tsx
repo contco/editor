@@ -19,7 +19,6 @@ export const ToggleBlock = (editor: ReactEditor, format: string) => {
   const isBActive = isBlockActive(editor, format);
   const selectedFormats = markFormats.filter((a) => isMarkActive(editor, a));
 
-  console.log('selectedFormats', selectedFormats);
   if (format === 'clear-format') {
     Transforms.setNodes(editor, {
       type: 'paragraph',
