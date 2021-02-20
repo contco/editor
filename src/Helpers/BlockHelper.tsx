@@ -35,9 +35,10 @@ export const ToggleBlock = (editor: ReactEditor, format: string) => {
 interface BLockButtonProps {
   format: string;
   icon: FC<SVGProps<SVGSVGElement>>;
+  iconColor?: string;
 }
 
-export const BlockButton: (props: BLockButtonProps) => JSX.Element = ({ format, icon }) => {
+export const BlockButton: (props: BLockButtonProps) => JSX.Element = ({ format, icon, iconColor = '#ffffff' }) => {
   const editor = useSlate();
   return (
     <Button
@@ -47,7 +48,7 @@ export const BlockButton: (props: BLockButtonProps) => JSX.Element = ({ format, 
         ToggleBlock(editor, format);
       }}
     >
-      <Icon svg={icon} />
+      <Icon svg={icon} color={iconColor} />
     </Button>
   );
 };
