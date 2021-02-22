@@ -108,7 +108,7 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
   };
 
   return (
-    <>
+    <div>
       <FixedMenu ref={ref} style={{ padding: '7px 25px 6px' }}>
         <MarkButton format="bold" icon={Bold} iconColor={ICON_COLOR} />
         <MarkButton format="italic" icon={Italic} iconColor={ICON_COLOR} />
@@ -136,6 +136,6 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
       ) : (
         ''
       )}
-    </>
+    </div>
   );
 };
