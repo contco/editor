@@ -73,7 +73,6 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
     rect = domRange?.getBoundingClientRect();
     el.style.opacity = 1;
     el.style.top = `${rect?.top + window.pageYOffset - el.offsetHeight + 70}px`;
-    console.log(el.offsetHeight);
     el.style.left = `${rect?.left + window.pageXOffset - el.offsetWidth / 2 + rect?.width / 2}px`;
     if (!isInput) {
       el.style.visibility = `hidden`;
@@ -109,7 +108,7 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
 
   return (
     <div>
-      <FixedMenu ref={ref} style={{ padding: '7px 25px 6px' }}>
+      <FixedMenu ref={ref} style={{ padding: '7px 15px 6px' }}>
         <MarkButton format="bold" icon={Bold} iconColor={ICON_COLOR} />
         <MarkButton format="italic" icon={Italic} iconColor={ICON_COLOR} />
         <MarkButton format="underlined" icon={Underline} iconColor={ICON_COLOR} />
