@@ -23,9 +23,10 @@ export const ToggleMark = (editor: ReactEditor, format: string) => {
 interface MarkButtonProps {
   format: string;
   icon: FC<SVGProps<SVGSVGElement>>;
+  iconColor?: string;
 }
 
-export const MarkButton: (props: MarkButtonProps) => JSX.Element = ({ format, icon }) => {
+export const MarkButton: (props: MarkButtonProps) => JSX.Element = ({ format, icon, iconColor = '#ffffff' }) => {
   const editor = useSlate();
   return (
     <Button
@@ -36,7 +37,7 @@ export const MarkButton: (props: MarkButtonProps) => JSX.Element = ({ format, ic
         ToggleMark(editor, format);
       }}
     >
-      <Icon svg={icon} />
+      <Icon svg={icon} color={iconColor} />
     </Button>
   );
 };

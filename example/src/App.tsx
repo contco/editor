@@ -5,6 +5,7 @@ import styled from 'styled-components';
 const StyledEditor = styled(Editor)`
   height: 60vh;
   background-color: #fef9e7;
+  overflow-y: auto;
 `;
 
 const App = () => {
@@ -104,6 +105,7 @@ const blockInitalValue2 = [
           { text: 'better than a' },
           { text: 'Hello World', properties: ['code'] },
           { text: 'link check', properties: ['a', 'https://google.com'] },
+          { text: ' better than a' },
         ],
       },
     },

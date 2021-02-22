@@ -12,7 +12,6 @@ import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
 import Leaf from './plugins/Leaf';
 import withBlockID from './plugins/withBlockID';
-
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';
 import { ADD, UPDATE, DELETE } from './constant/operations';
@@ -74,7 +73,6 @@ const Editor: (props: Props) => any = ({
 
   return (
     <Slate editor={editor} value={editorData} onChange={(newValue: any) => onChangeContent(newValue)}>
-      <ToolBar />
       <Editable
         className={className}
         placeholder={placeholder}
@@ -82,6 +80,7 @@ const Editor: (props: Props) => any = ({
         renderLeaf={renderLeaf}
         readOnly={readOnly}
       />
+      <ToolBar />
     </Slate>
   );
 };

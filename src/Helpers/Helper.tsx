@@ -11,8 +11,8 @@ export interface ButtonProps {
 }
 
 export const Button = React.forwardRef<HTMLSpanElement, ButtonProps>(
-  ({ active, reversed, onMouseDown, children }, ref) => (
-    <StyledButton active={active} reversed={reversed} onMouseDown={onMouseDown} ref={ref}>
+  ({ active, reversed, onMouseDown, children, ...props }, ref) => (
+    <StyledButton {...props} active={active} reversed={reversed} onMouseDown={onMouseDown} ref={ref}>
       {children}
     </StyledButton>
   ),
@@ -24,8 +24,8 @@ interface IconProps {
   color?: string;
 }
 
-export const Icon = React.forwardRef<SVGSVGElement, IconProps>(({ svg, color = '#ffffff' }, ref) => (
-  <StyledIcon as={svg} color={color} ref={ref} width="11px" height="14px" />
+export const Icon = React.forwardRef<SVGSVGElement, IconProps>(({ svg, ...props }, ref) => (
+  <StyledIcon as={svg} {...props} ref={ref} width="11px" height="14px" />
 ));
 
 // Menu
