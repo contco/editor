@@ -14,9 +14,10 @@ const isLinkActive = (editor: any) => {
 interface LinkButtonProps {
   icon: FC<SVGProps<SVGSVGElement>>;
   showInput: () => void;
+  iconColor?: string;
 }
 
-export const LinkButton: (props: LinkButtonProps) => JSX.Element = ({ icon, showInput }) => {
+export const LinkButton: (props: LinkButtonProps) => JSX.Element = ({ icon, showInput, iconColor = '#ffffff' }) => {
   const editor = useSlate();
   const active = isLinkActive(editor) !== undefined;
   return (
@@ -28,7 +29,7 @@ export const LinkButton: (props: LinkButtonProps) => JSX.Element = ({ icon, show
       }}
       reversed={false}
     >
-      <Icon svg={icon} />
+      <Icon svg={icon} color={iconColor} />
     </Button>
   );
 };
