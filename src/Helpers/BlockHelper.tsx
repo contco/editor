@@ -48,7 +48,7 @@ export const BlockButton: (props: BLockButtonProps) => JSX.Element = ({ format, 
         ToggleBlock(editor, format);
       }}
     >
-      <Icon svg={icon} color={iconColor} />
+      <Icon active={isBlockActive(editor, format)} svg={icon} color={iconColor} />
     </Button>
   );
 };
