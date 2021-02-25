@@ -6,7 +6,7 @@ import { StyledButton, StyledIcon, Container, Triangle, StyledMenu } from './Hel
 export interface ButtonProps {
   active?: boolean;
   reversed?: boolean;
-  children: ReactChild | ReactChildren;
+  children?: ReactChild | ReactChildren;
   onMouseDown?: (event: MouseEvent) => void;
 }
 
@@ -19,7 +19,7 @@ export const Button = React.forwardRef<HTMLSpanElement, ButtonProps>(
 );
 
 // icon
-interface IconProps {
+interface IconProps extends ButtonProps {
   svg: FC<SVGProps<SVGSVGElement>>;
   color?: string;
 }

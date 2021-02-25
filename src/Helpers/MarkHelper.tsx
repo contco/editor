@@ -37,7 +37,7 @@ export const MarkButton: (props: MarkButtonProps) => JSX.Element = ({ format, ic
         ToggleMark(editor, format);
       }}
     >
-      <Icon svg={icon} color={iconColor} />
+      <Icon reversed active={isMarkActive(editor, format)} svg={icon} color={iconColor} />
     </Button>
   );
 };

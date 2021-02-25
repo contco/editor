@@ -7,7 +7,7 @@ import { Slate, Editable, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import { pipe } from '@udecode/slate-plugins';
 import { differenceBy, differenceWith, isEmpty, isEqual } from 'lodash';
-import { ToolBar } from './ToolBar';
+import { HoveringToolBar, ToolBar } from './ToolBar';
 import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
 import Leaf from './plugins/Leaf';
@@ -27,6 +27,7 @@ interface Props {
   placeholder?: string;
   placeholderStyles?: any;
   className?: string;
+  isHoveringToolBar?: boolean;
 }
 
 const Editor: (props: Props) => any = ({
@@ -36,6 +37,7 @@ const Editor: (props: Props) => any = ({
   placeholder = '',
   placeholderStyles = {},
   className,
+  isHoveringToolBar = false,
 }) => {
   const [editorData, setData] = useState(EMPTY_NODE);
   const withPlugins = [withReact, withHistory, withLinks, withBlockID] as const;
@@ -80,7 +82,7 @@ const Editor: (props: Props) => any = ({
         renderLeaf={renderLeaf}
         readOnly={readOnly}
       />
-      <ToolBar />
+      {isHoveringToolBar ? <HoveringToolBar /> : <ToolBar />}
     </Slate>
   );
 };

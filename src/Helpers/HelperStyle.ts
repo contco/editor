@@ -5,6 +5,7 @@ import { ButtonProps } from './Helper';
 export const StyledButton = styled.span<ButtonProps>`
   cursor: pointer;
   color: ${(props) => (props.reversed ? (props.active ? 'white' : '#aaa') : props.active ? 'black' : '#ccc')};
+  background: ${(props) => (props.reversed ? (props.active ? '#9fa6bf' : '') : props.active ? '#9fa6bf' : '')};
   &: hover {
     background: #e7e9f5;
   }
@@ -12,11 +13,13 @@ export const StyledButton = styled.span<ButtonProps>`
   border-radius: 2px;
 `;
 
-export const StyledIcon = styled.svg`
+export const StyledIcon = styled.svg<ButtonProps>`
   fill: ${(props) => props.color};
   & use {
     fill: ${(props) => props.color};
+    fill: ${(props) => (props.reversed ? (props.active ? '#ffffff' : '') : props.active ? '#ffffff' : '')};
   }
+  fill: ${(props) => (props.reversed ? (props.active ? '#ffffff' : '') : props.active ? '#ffffff' : '')};
 `;
 
 // Menu

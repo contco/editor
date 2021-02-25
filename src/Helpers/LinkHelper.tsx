@@ -22,14 +22,14 @@ export const LinkButton: (props: LinkButtonProps) => JSX.Element = ({ icon, show
   const active = isLinkActive(editor) !== undefined;
   return (
     <Button
-      active={active}
+      active={!active}
       onMouseDown={(event) => {
         event.preventDefault();
         showInput();
       }}
       reversed={false}
     >
-      <Icon svg={icon} color={iconColor} />
+      <Icon reversed active={!active} svg={icon} color={iconColor} />
     </Button>
   );
 };
