@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RenderElementProps } from 'slate-react';
-import { Paragraph, CodeBlock, BlockQuote, Link, LinkContainer, Triangle, Rectangle } from './ElementStyle';
+import { Paragraph, CodeBlock, BlockQuote, Link, Image, LinkContainer, Triangle, Rectangle } from './ElementStyle';
 import getShortLink from '../utils/getShortLink';
 
 const Element: React.FC<RenderElementProps> = ({ attributes, children, element }: any) => {
@@ -30,6 +30,15 @@ const Element: React.FC<RenderElementProps> = ({ attributes, children, element }
             <Rectangle>{getShortLink(element?.url)}</Rectangle>
           </LinkContainer>
         </Link>
+      );
+    case `image`:
+      return (
+        <div {...attributes}>
+          <div contentEditable={false}>
+            <Image src={element.url} />
+          </div>
+          {children}
+        </div>
       );
     default:
       return <p {...attributes}>{children}</p>;

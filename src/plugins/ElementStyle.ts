@@ -71,3 +71,9 @@ export const Link = styled.a`
   text-decoration: underline;
   color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.link : '#050b21')};
 `;
+
+export const Image = styled.img`
+  display: block;
+  max-width: 100%;
+  max-height: 20em;
+`;
