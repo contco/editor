@@ -71,3 +71,11 @@ export const Link = styled.a`
   text-decoration: underline;
   color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.link : '#050b21')};
 `;
+
+export const Heading1 = styled.h1`
+  color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.text : '#050b21')};
+`;
+
+export const Heading2 = styled.h2`
+  color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.text : '#050b21')};
+`;
