@@ -76,4 +76,5 @@ export const Image = styled.img`
   display: block;
   max-width: 100%;
   max-height: 20em;
+  padding: 4px 0px 0px 20px;
 `;
