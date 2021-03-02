@@ -1,6 +1,17 @@
 import * as React from 'react';
 import { RenderElementProps } from 'slate-react';
-import { Paragraph, CodeBlock, BlockQuote, Link, Image, LinkContainer, Triangle, Rectangle } from './ElementStyle';
+import {
+  Paragraph,
+  CodeBlock,
+  BlockQuote,
+  Link,
+  LinkContainer,
+  Triangle,
+  Rectangle,
+  Heading1,
+  Heading2,
+  Image,
+} from './ElementStyle';
 import getShortLink from '../utils/getShortLink';
 
 const Element: React.FC<RenderElementProps> = ({ attributes, children, element }: any) => {
@@ -14,9 +25,9 @@ const Element: React.FC<RenderElementProps> = ({ attributes, children, element }
     case 'bulleted-list':
       return <ul {...attributes}>{children}</ul>;
     case 'heading-one':
-      return <h1 {...attributes}>{children}</h1>;
+      return <Heading1 {...attributes}>{children}</Heading1>;
     case 'heading-two':
-      return <h2 {...attributes}>{children}</h2>;
+      return <Heading2 {...attributes}>{children}</Heading2>;
     case 'list-item':
       return <li {...attributes}>{children}</li>;
     case 'numbered-list':

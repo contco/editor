@@ -1,7 +1,16 @@
 /* eslint no-underscore-dangle: "off" */
 import * as React from 'react';
 import { Code } from './plugins/LeafStyle';
-import { Paragraph, BlockQuote, Link, LinkContainer, Triangle, Rectangle } from './plugins/ElementStyle';
+import {
+  Paragraph,
+  BlockQuote,
+  Link,
+  LinkContainer,
+  Triangle,
+  Rectangle,
+  Heading1,
+  Heading2,
+} from './plugins/ElementStyle';
 import {
   PROPERTY_BOLD,
   PROPERTY_ITALIC,
@@ -58,24 +67,24 @@ const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
     const render = data.map((block: any) => {
       if (block.block.type === HEADING1) {
         return (
-          <h1 key={block.block._id}>
+          <Heading1 key={block.block._id}>
             {block.block.properties.document.map((document: any) => (
               <span key={document.text}>
                 {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
               </span>
             ))}
-          </h1>
+          </Heading1>
         );
       }
       if (block.block.type === HEADING2) {
         return (
-          <h2 key={block.block._id}>
+          <Heading2 key={block.block._id}>
             {block.block.properties.document.map((document: any) => (
               <span key={document.text}>
                 {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
               </span>
             ))}
-          </h2>
+          </Heading2>
         );
       }
       if (block.block.type === TEXT) {
