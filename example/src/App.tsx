@@ -110,5 +110,21 @@ const blockInitalValue2 = [
       },
     },
   },
+  {
+    block: {
+      _id: '5',
+      type: 'image',
+      properties: {
+        document: [
+          {
+            text: '',
+            properties: [
+              'https://repository-images.githubusercontent.com/125159715/61f2ee00-865a-11e9-8ce5-f7028c561633',
+            ],
+          },
+        ],
+      },
+    },
+  },
 ];
 export default App;

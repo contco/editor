@@ -56,6 +56,10 @@ const deserialization = (blockContentList: any) => {
     const { block } = blockContent;
     const children = getChildNodes(block);
     const type = getNodeType(block.type);
+    if (type === 'image' && block.properties) {
+      return { id: block._id, type, children, url: block.properties.document[0].properties };
+    }
+
     return { id: block._id, type, children };
   });
   return deserializedContent;
