@@ -7,6 +7,7 @@ import { Slate, Editable, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import { pipe } from '@udecode/slate-plugins';
 import { differenceBy, differenceWith, isEmpty, isEqual } from 'lodash';
+import isHotkey from 'is-hotkey';
 import { HoveringToolBar, ToolBar } from './ToolBar';
 import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
@@ -16,6 +17,8 @@ import serialize from './serialize/index';
 import deserialize from './deserialize/index';
 import { ADD, UPDATE, DELETE } from './constant/operations';
 import EMPTY_NODE from './constant/emptyNode';
+import { ToggleMark } from './Helpers/MarkHelper';
+import HOTKEYS from './Helpers/HotKeys';
 
 interface Props {
   data?: any;
@@ -80,6 +83,15 @@ const Editor: (props: Props) => any = ({
         placeholder={placeholder}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
+        onKeyDown={(event) => {
+          Object.keys(HOTKEYS).forEach((key) => {
+            if (isHotkey(key, event as any)) {
+              event.preventDefault();
+              const mark = HOTKEYS[key];
+              ToggleMark(editor, mark);
+            }
+          });
+        }}
         readOnly={readOnly}
       />
       {isHoveringToolBar ? <HoveringToolBar /> : <ToolBar />}
