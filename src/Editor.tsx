@@ -18,7 +18,7 @@ import deserialize from './deserialize/index';
 import { ADD, UPDATE, DELETE } from './constant/operations';
 import EMPTY_NODE from './constant/emptyNode';
 import { ToggleMark } from './Helpers/MarkHelper';
-import HOTKEYS from './Helpers/HotKeys';
+import HOTKEYS from './constant/HotKeys';
 
 interface Props {
   data?: any;
@@ -76,6 +76,16 @@ const Editor: (props: Props) => any = ({
     setData(newData);
   };
 
+  const Listener = (event: any) => {
+    Object.keys(HOTKEYS).forEach((key) => {
+      if (isHotkey(key, event as any)) {
+        event.preventDefault();
+        const mark = HOTKEYS[key];
+        ToggleMark(editor, mark);
+      }
+    });
+  };
+
   return (
     <Slate editor={editor} value={editorData} onChange={(newValue: any) => onChangeContent(newValue)}>
       <Editable
@@ -83,15 +93,7 @@ const Editor: (props: Props) => any = ({
         placeholder={placeholder}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
-        onKeyDown={(event) => {
-          Object.keys(HOTKEYS).forEach((key) => {
-            if (isHotkey(key, event as any)) {
-              event.preventDefault();
-              const mark = HOTKEYS[key];
-              ToggleMark(editor, mark);
-            }
-          });
-        }}
+        onKeyDown={Listener}
         readOnly={readOnly}
       />
       {isHoveringToolBar ? <HoveringToolBar /> : <ToolBar />}
