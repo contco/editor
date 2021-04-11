@@ -22,7 +22,7 @@ import { HEADING1, HEADING2, TEXT, BLOCK_QUOTE } from './constant/blockType';
 import getShortLink from './utils/getShortLink';
 
 interface ViewerProps {
-  data?: any;
+  data: Array<Block>;
   className?: string;
 }
 
@@ -64,48 +64,60 @@ const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
   };
 
   const renderBlock = () => {
-    const render = data.map((block: any) => {
-      if (block.block.type === HEADING1) {
+    const render = data.map((block: Block) => {
+      if (block.type === HEADING1) {
         return (
-          <Heading1 key={block.block._id}>
-            {block.block.properties.document.map((document: any) => (
-              <span key={document.text}>
-                {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
-              </span>
-            ))}
+          <Heading1 key={block.id}>
+            {block.document &&
+              block.document.map((document: DocumentProperties) => (
+                <span key={document.text}>
+                  {document.properties !== undefined
+                    ? renderProperty(document.properties, document.text)
+                    : document.text}
+                </span>
+              ))}
           </Heading1>
         );
       }
-      if (block.block.type === HEADING2) {
+      if (block.type === HEADING2) {
         return (
-          <Heading2 key={block.block._id}>
-            {block.block.properties.document.map((document: any) => (
-              <span key={document.text}>
-                {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
-              </span>
-            ))}
+          <Heading2 key={block.id}>
+            {block.document &&
+              block.document.map((document: DocumentProperties) => (
+                <span key={document.text}>
+                  {document.properties !== undefined
+                    ? renderProperty(document.properties, document.text)
+                    : document.text}
+                </span>
+              ))}
           </Heading2>
         );
       }
-      if (block.block.type === TEXT) {
+      if (block.type === TEXT) {
         return (
-          <Paragraph key={block.block._id}>
-            {block.block.properties.document.map((document: any) => (
-              <span key={document.text}>
-                {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
-              </span>
-            ))}
+          <Paragraph key={block.id}>
+            {block.document &&
+              block.document.map((document: DocumentProperties) => (
+                <span key={document.text}>
+                  {document.properties !== undefined
+                    ? renderProperty(document.properties, document.text)
+                    : document.text}
+                </span>
+              ))}
           </Paragraph>
         );
       }
-      if (block.block.type === BLOCK_QUOTE) {
+      if (block.type === BLOCK_QUOTE) {
         return (
-          <BlockQuote key={block.block._id}>
-            {block.block.properties.document.map((document: any) => (
-              <span key={document.text}>
-                {document.properties !== undefined ? renderProperty(document.properties, document.text) : document.text}
-              </span>
-            ))}
+          <BlockQuote key={block.id}>
+            {block.document &&
+              block.document.map((document: DocumentProperties) => (
+                <span key={document.text}>
+                  {document.properties !== undefined
+                    ? renderProperty(document.properties, document.text)
+                    : document.text}
+                </span>
+              ))}
           </BlockQuote>
         );
       }
