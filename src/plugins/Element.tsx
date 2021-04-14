@@ -10,6 +10,7 @@ import {
   Rectangle,
   Heading1,
   Heading2,
+  Image,
 } from './ElementStyle';
 import getShortLink from '../utils/getShortLink';
 
@@ -40,6 +41,15 @@ const Element: React.FC<RenderElementProps> = ({ attributes, children, element }
             <Rectangle>{getShortLink(element?.url)}</Rectangle>
           </LinkContainer>
         </Link>
+      );
+    case `image`:
+      return (
+        <div {...attributes}>
+          <div contentEditable={false}>
+            <Image src={element.url} />
+          </div>
+          {children}
+        </div>
       );
     default:
       return <p {...attributes}>{children}</p>;

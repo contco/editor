@@ -13,6 +13,8 @@ import { withLinks } from './Helpers/LinkHelper';
 import Element from './plugins/Element';
 import Leaf from './plugins/Leaf';
 import withBlockID from './plugins/withBlockID';
+import withImages from './plugins/withImages';
+import withBreak from './plugins/withBreak';
 import serialize from './serialize/index';
 import deserialize from './deserialize/index';
 import { ADD, UPDATE, DELETE } from './constant/operations';
@@ -43,7 +45,7 @@ const Editor: (props: Props) => any = ({
   isHoveringToolBar = false,
 }) => {
   const [editorData, setData] = useState(EMPTY_NODE);
-  const withPlugins = [withReact, withHistory, withLinks, withBlockID] as const;
+  const withPlugins = [withReact, withHistory, withLinks, withBlockID, withImages, withBreak] as const;
   const editor: any = useMemo(() => pipe(createEditor(), ...withPlugins), []);
   const renderElement = useCallback((props) => <Element {...props} />, []);
   const renderLeaf = useCallback((props) => <Leaf {...props} placeholderStyles={placeholderStyles} />, []);

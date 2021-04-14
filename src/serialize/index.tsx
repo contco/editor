@@ -38,7 +38,12 @@ const checkIdAndReturnBlock = (type: string, document: any, node: any) => {
 const serializeParagraph = (paragraphNode: any, textType: string) => {
   const document = paragraphNode.children.map((childNodes: any) => {
     const text = getParagraphText(childNodes);
-    const properties = getParagraphProperties(childNodes);
+    let properties = [];
+    if (textType === 'image') {
+      properties.push(paragraphNode.url);
+    } else {
+      properties = getParagraphProperties(childNodes);
+    }
     return { text, properties };
   });
   const paragraphBlock = checkIdAndReturnBlock(textType, document, paragraphNode);
@@ -64,6 +69,8 @@ const serialize = (slateNodesList: any) => {
       case 'heading-one':
       case 'heading-two':
         return serializeHeading(node, node.type);
+      case 'image':
+        return serializeParagraph(node, 'image');
       default:
         return serializeParagraph(node, 'text');
     }

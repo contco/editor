@@ -79,3 +79,9 @@ export const Heading1 = styled.h1`
 export const Heading2 = styled.h2`
   color: ${({ theme }) => (theme.colors !== undefined ? theme.colors.text : '#050b21')};
 `;
+export const Image = styled.img`
+  display: block;
+  max-width: 100%;
+  max-height: 20em;
+  padding: 4px 0px 0px 20px;
+`;
