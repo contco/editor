@@ -19,6 +19,9 @@ import { ReactComponent as H1 } from '../assets/h1.svg';
 import { ReactComponent as H2 } from '../assets/h2.svg';
 import { ReactComponent as CLEAR_FORMAT } from '../assets/clear_format.svg';
 
+import { ReactComponent as numberList } from '../assets/numberList.svg';
+import { ReactComponent as bulletlist } from '../assets/bulletList.svg';
+
 const ICON_COLOR = '#b5b9c6';
 export const FixedMenu: any = React.forwardRef(({ ...props }, ref: React.Ref<HTMLDivElement>) => (
   <StyledMenu ref={ref} {...props} />
@@ -118,6 +121,8 @@ export const ToolBar: React.FC<ToolBarProps> = () => {
         <BlockButton format="block-quote" icon={Quote} iconColor={ICON_COLOR} />
         <MarkButton format="code" icon={Coding} iconColor={ICON_COLOR} />
         <BlockButton format="clear-format" icon={CLEAR_FORMAT} iconColor={ICON_COLOR} />
+        <BlockButton format="numbered-list" icon={numberList} iconColor={ICON_COLOR} />
+        <BlockButton format="bulleted-list" icon={bulletlist} iconColor={ICON_COLOR} />
       </FixedMenu>
       <Menu ref={refSelection} />
       {isInput ? (

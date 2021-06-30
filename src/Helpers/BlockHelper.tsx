@@ -5,6 +5,7 @@ import { Button, Icon } from './Helper';
 import { isMarkActive } from './MarkHelper';
 
 const markFormats = ['bold', 'italic', 'underlined', 'link', 'code'];
+const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 
 // is Block Active
 const isBlockActive = (editor: ReactEditor, format: string) => {
@@ -18,16 +19,44 @@ const isBlockActive = (editor: ReactEditor, format: string) => {
 export const ToggleBlock = (editor: ReactEditor, format: string) => {
   const isBActive = isBlockActive(editor, format);
   const selectedFormats = markFormats.filter((a) => isMarkActive(editor, a));
+  const isList = LIST_TYPES.includes(format);
 
   if (format === 'clear-format') {
     Transforms.setNodes(editor, {
       type: 'paragraph',
     });
     selectedFormats.map((a) => Editor.removeMark(editor, a));
+  }
+  if (isBActive) {
+    Transforms.setNodes(editor, {
+      type: 'paragraph',
+    });
+  } else if (isList) {
+    Transforms.setNodes(editor, {
+      type: 'list-item',
+    });
   } else {
     Transforms.setNodes(editor, {
-      type: isBActive ? 'paragraph' : format,
+      type: format,
     });
+  }
+  // Transforms.setNodes(editor, {
+  //    type: isBActive ? 'paragraph' : isList ? 'list-item' : format,
+  // });
+  // I have chaned this nested ternary expression due to typescirpt error
+
+  Transforms.unwrapNodes(editor, {
+    match: (n) => LIST_TYPES.includes(n.type as string),
+    split: true,
+  });
+
+  // Transforms.setNodes(editor, {
+  //   type: isBActive ? 'paragraph' : isList ? 'list-item' : format,
+  // });
+
+  if (!isBActive && isList) {
+    const block = { type: format, children: [] };
+    Transforms.wrapNodes(editor, block);
   }
 };
 

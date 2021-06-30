@@ -10,6 +10,8 @@ import {
   Rectangle,
   Heading1,
   Heading2,
+  NumberList,
+  BulletList,
 } from './ElementStyle';
 import getShortLink from '../utils/getShortLink';
 
@@ -28,9 +30,9 @@ const Element: React.FC<RenderElementProps> = ({ attributes, children, element }
     case 'heading-two':
       return <Heading2 {...attributes}>{children}</Heading2>;
     case 'list-item':
-      return <li {...attributes}>{children}</li>;
+      return <BulletList {...attributes}>{children}</BulletList>;
     case 'numbered-list':
-      return <ol {...attributes}>{children}</ol>;
+      return <NumberList {...attributes}>{children}</NumberList>;
     case 'link':
       return (
         <Link {...attributes} href={element.url} target="_blank" contentEditable={false}>
