@@ -121,6 +121,9 @@ export const HoveringToolBar: React.FC<HoveringToolBarProps> = () => {
         <BlockButton format="block-quote" icon={Quote} />
         <MarkButton format="code" icon={Coding} />
         <BlockButton format="clear-format" icon={CLEAR_FORMAT} />
+
+        {/* <BlockButton format="numbered-list" icon="format_list_numbered" />
+        <BlockButton format="bulleted-list" icon="format_list_bulleted" /> */}
       </Menu>
     </Portal>
   );
