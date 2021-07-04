@@ -30,9 +30,9 @@ const getHeadingProperties = (textNode: any) => {
 
 const checkIdAndReturnBlock = (type: string, document: any, node: any) => {
   if (node.id) {
-    return { block: { _id: node.id, type, properties: { document } } };
+    return { block: { _id: node.id, type, document } };
   }
-  return { block: { type, properties: { document } } };
+  return { block: { type, document } };
 };
 
 const serializeParagraph = (paragraphNode: any, textType: string) => {
@@ -47,14 +47,14 @@ const serializeParagraph = (paragraphNode: any, textType: string) => {
 const serializeListing = (lisitNode: any, listType: string) => {
   const children = [];
   const { _id } = lisitNode;
-
   for (let i = 0; i < lisitNode.children.length; i += 1) {
     children.push(serializeParagraph(lisitNode.children[i], 'list-item'));
   }
-  const listBlock = { block: { children, type: listType } };
+  const listBlock = { children, type: listType };
   if (_id) {
-    listBlock.block[_id] = _id;
+    listBlock[_id] = _id;
   }
+  console.log(listBlock);
 
   return listBlock;
 };
