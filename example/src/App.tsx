@@ -16,9 +16,9 @@ const App = () => {
   }, []);
 
   const onContentUpdate = (content: any) => {
-    console.log(content);
+    console.log('onContentUpdate--->', content);
   };
-  console.log(document);
+  console.log('document--->', document);
   return (
     <>
       <div style={{ minHeight: 200 }}>
@@ -90,6 +90,20 @@ const blockInitalValue2 = [
       { text: ' better than a' },
     ],
   },
+  // {
+  //   id: '5',
+  //   type: 'number-list',
+  //   children: [
+  //     {
+  //       id: '6',
+  //       type: "list-item",
+  //       document: [
+  //         { text: 'number list point 1', properties: [] },
+  //         { text: 'number list point 2 ', properties: ['b'] },
+  //       ]
+  //     }
+  //   ]
+  // },
 ];
 
 export default App;

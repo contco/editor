@@ -30,9 +30,9 @@ const getHeadingProperties = (textNode: any) => {
 
 const checkIdAndReturnBlock = (type: string, document: any, node: any) => {
   if (node.id) {
-    return { block: { _id: node.id, type, document } };
+    return { id: node.id, type, document };
   }
-  return { block: { type, document } };
+  return { type, document };
 };
 
 const serializeParagraph = (paragraphNode: any, textType: string) => {
@@ -46,16 +46,14 @@ const serializeParagraph = (paragraphNode: any, textType: string) => {
 };
 const serializeListing = (lisitNode: any, listType: string) => {
   const children = [];
-  const { _id } = lisitNode;
+  const { id } = lisitNode;
   for (let i = 0; i < lisitNode.children.length; i += 1) {
     children.push(serializeParagraph(lisitNode.children[i], 'list-item'));
   }
   const listBlock = { children, type: listType };
-  if (_id) {
-    listBlock[_id] = _id;
+  if (id) {
+    listBlock.id = id;
   }
-  console.log(listBlock);
-
   return listBlock;
 };
 const serializeHeading = (headingNode: any, headingType: string) => {
@@ -68,8 +66,6 @@ const serializeHeading = (headingNode: any, headingType: string) => {
 };
 
 const serialize = (slateNodesList: any) => {
-  console.log(slateNodesList);
-
   const serializedBlocks = slateNodesList.map((node: any) => {
     switch (node.type) {
       case 'paragraph':
