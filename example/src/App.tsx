@@ -90,20 +90,38 @@ const blockInitalValue2 = [
       { text: ' better than a' },
     ],
   },
-  // {
-  //   id: '5',
-  //   type: 'number-list',
-  //   children: [
-  //     {
-  //       id: '6',
-  //       type: "list-item",
-  //       document: [
-  //         { text: 'number list point 1', properties: [] },
-  //         { text: 'number list point 2 ', properties: ['b'] },
-  //       ]
-  //     }
-  //   ]
-  // },
+  {
+    id: '5',
+    type: 'numbered-list',
+    children: [
+      {
+        id: '6',
+        type: 'list-item',
+        document: [{ text: 'number list point 1', properties: [] }],
+      },
+      {
+        id: '7',
+        type: 'list-item',
+        document: [{ text: 'number list point 2 ', properties: ['b'] }],
+      },
+    ],
+  },
+  {
+    id: '8',
+    type: 'bulleted-list',
+    children: [
+      {
+        id: '9',
+        type: 'list-item',
+        document: [{ text: 'Bulleted list point 1', properties: [] }],
+      },
+      {
+        id: '10',
+        type: 'list-item',
+        document: [{ text: 'Bulleted list point 2 ', properties: ['b'] }],
+      },
+    ],
+  },
 ];
 
 export default App;

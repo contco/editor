@@ -52,19 +52,23 @@ const getChildNodes = (block: any) => {
 };
 
 const deserialization = (blockContentList: any) => {
-  console.log('blockContentList--->', blockContentList);
   const deserializedContent = blockContentList.map((blockContent: any) => {
     console.log(blockContent);
     const block = blockContent;
-    console.log('block--->', block);
-    // if (block.type === 'number-list' || block.type === 'bulleted-list') {
+    if (block.type === 'numbered-list' || block.type === 'bulleted-list') {
+      console.log(block.children);
+      const listItem = block?.children.map((child: any) => {
+        const children = getChildNodes(child);
+        const type = getNodeType(child.type);
+        return { id: child.id, type, children };
+      });
+      const type = getNodeType(block.type);
+      return { id: block.id, type, children: listItem };
+    }
 
-    // }
-    // else {
     const children = getChildNodes(block);
     const type = getNodeType(block.type);
     return { id: block.id, type, children };
-    // }
   });
   return deserializedContent;
 };
