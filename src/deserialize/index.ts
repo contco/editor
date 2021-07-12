@@ -10,8 +10,8 @@ const getNodeType = (blockType: string) => {
 };
 
 const getChildNodes = (block: any) => {
-  if (block && 'properties' in block && 'document' in block.properties) {
-    const blockDocumentsList = block.properties.document;
+  if (block && block.document) {
+    const blockDocumentsList = block.document;
     const childNodes = blockDocumentsList.map((propertyBlock: any) => {
       const { properties, text } = propertyBlock;
       if ((properties !== undefined && properties.length === 0) || properties === undefined) {
@@ -53,10 +53,22 @@ const getChildNodes = (block: any) => {
 
 const deserialization = (blockContentList: any) => {
   const deserializedContent = blockContentList.map((blockContent: any) => {
-    const { block } = blockContent;
+    console.log(blockContent);
+    const block = blockContent;
+    if (block.type === 'numbered-list' || block.type === 'bulleted-list') {
+      console.log(block.children);
+      const listItem = block?.children.map((child: any) => {
+        const children = getChildNodes(child);
+        const type = getNodeType(child.type);
+        return { id: child.id, type, children };
+      });
+      const type = getNodeType(block.type);
+      return { id: block.id, type, children: listItem };
+    }
+
     const children = getChildNodes(block);
     const type = getNodeType(block.type);
-    return { id: block._id, type, children };
+    return { id: block.id, type, children };
   });
   return deserializedContent;
 };
