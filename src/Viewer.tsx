@@ -10,6 +10,8 @@ import {
   Rectangle,
   Heading1,
   Heading2,
+  NumberList,
+  BulletList,
 } from './plugins/ElementStyle';
 import {
   PROPERTY_BOLD,
@@ -18,7 +20,7 @@ import {
   PROPERTY_UNDERLINED,
   PROPERTY_LINK,
 } from './constant/propertyType';
-import { HEADING1, HEADING2, TEXT, BLOCK_QUOTE } from './constant/blockType';
+import { HEADING1, HEADING2, TEXT, BLOCK_QUOTE, NUMBERED_LIST, BULLETED_LIST } from './constant/blockType';
 import getShortLink from './utils/getShortLink';
 
 interface ViewerProps {
@@ -121,7 +123,44 @@ const Viewer: (props: ViewerProps) => any = ({ data, className }) => {
           </BlockQuote>
         );
       }
-
+      if (block.type === NUMBERED_LIST) {
+        return (
+          <NumberList key={block.id}>
+            {block &&
+              block.children &&
+              block.children.map(
+                (b: any) =>
+                  b.document &&
+                  b.document.map((document: DocumentProperties) => (
+                    <li key={document.text}>
+                      {document.properties !== undefined
+                        ? renderProperty(document.properties, document.text)
+                        : document.text}
+                    </li>
+                  )),
+              )}
+          </NumberList>
+        );
+      }
+      if (block.type === BULLETED_LIST) {
+        return (
+          <ul key={block.id}>
+            {block &&
+              block.children &&
+              block.children.map(
+                (b: any) =>
+                  b.document &&
+                  b.document.map((document: DocumentProperties) => (
+                    <BulletList key={document.text}>
+                      {document.properties !== undefined
+                        ? renderProperty(document.properties, document.text)
+                        : document.text}
+                    </BulletList>
+                  )),
+              )}
+          </ul>
+        );
+      }
       return null;
     });
     return render;

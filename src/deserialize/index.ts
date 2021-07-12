@@ -53,10 +53,8 @@ const getChildNodes = (block: any) => {
 
 const deserialization = (blockContentList: any) => {
   const deserializedContent = blockContentList.map((blockContent: any) => {
-    console.log(blockContent);
     const block = blockContent;
     if (block.type === 'numbered-list' || block.type === 'bulleted-list') {
-      console.log(block.children);
       const listItem = block?.children.map((child: any) => {
         const children = getChildNodes(child);
         const type = getNodeType(child.type);
