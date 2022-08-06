@@ -58,7 +58,13 @@ const Editor: (props: Props) => any = ({
   const sendContentToApp = (nodeData: any, operation: string, newNodes: any) => {
     if (!isEmpty(nodeData)) {
       const type = nodeData.length === 1 ? 'single' : 'multi';
-      const activeObject = { data: serialize(nodeData), type, operation, newChildren: serialize(newNodes) };
+      const activeObject = {
+        data: serialize(nodeData),
+        type,
+        operation,
+        newChildren: serialize(newNodes),
+        raw: newNodes,
+      };
       onContentUpdate(activeObject);
     }
   };
