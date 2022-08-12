@@ -29,6 +29,13 @@ const withBlockID = (editor: any) => {
         properties: { ...operation.properties, id: idToUse },
       });
     }
+    if (operation.type === 'split_node') {
+      const idToUse = nanoID;
+      return apply({
+        ...operation,
+        properties: { ...operation.properties, id: idToUse },
+      });
+    }
     if (operation.type === 'merge_node' && operation.path.length === 1) {
       localEditor.removedIDs.add(operation.properties.id);
       return apply(operation);

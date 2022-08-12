@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Editor, Viewer } from 'editor';
+import { Editor, Viewer, RawViewer } from 'editor';
 import styled from 'styled-components';
 
 const StyledEditor = styled(Editor)`
@@ -8,15 +8,20 @@ const StyledEditor = styled(Editor)`
   overflow-y: auto;
 `;
 
+const StyledRawViewer = styled(RawViewer)`
+  background-color: #f1f1f1;
+`;
+
 const App = () => {
   const [document, setDocument] = useState<any>(blockInitalValue1);
+  const [rawContent, setRawContent] = useState<any>(null);
 
   useEffect(() => {
     setDocument(blockInitalValue2);
   }, []);
 
   const onContentUpdate = (content: any) => {
-    console.log('onContentUpdate--->', content);
+    setRawContent(content.raw);
   };
   console.log('document--->', document);
   return (
@@ -30,6 +35,7 @@ const App = () => {
         />
       </div>
       <Viewer data={document} />
+      {rawContent ? <StyledRawViewer data={rawContent} /> : null}
     </>
   );
 };
