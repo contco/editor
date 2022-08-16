@@ -22,10 +22,11 @@ export const ToggleBlock = (editor: ReactEditor, format: string) => {
   const isList = LIST_TYPES.includes(format);
 
   if (format === 'clear-format') {
+    selectedFormats.map((a) => Editor.removeMark(editor, a));
+
     Transforms.setNodes(editor, {
       type: 'paragraph',
     });
-    selectedFormats.map((a) => Editor.removeMark(editor, a));
   }
   if (isBActive) {
     Transforms.setNodes(editor, {
