@@ -17,11 +17,12 @@ import {
 import {
   HEADING1,
   HEADING2,
-  TEXT,
+  PARAGRAPH,
   BLOCK_QUOTE,
   NUMBERED_LIST,
   BULLETED_LIST,
   CLEAR_FORMAT,
+  LIST_ITEM,
 } from './constant/blockType';
 import getShortLink from './utils/getShortLink';
 
@@ -87,7 +88,7 @@ const RawViewer: (props: ViewerProps) => any = ({ data, className }) => {
           </Heading2>
         );
       }
-      if (node.type === TEXT || node.type === CLEAR_FORMAT) {
+      if (node.type === PARAGRAPH || node.type === CLEAR_FORMAT) {
         return (
           <Paragraph key={node.id}>
             {node.children && node.children.map((leaf: any) => <span key={leaf.text}>{renderProperty(leaf)}</span>)}
@@ -118,6 +119,13 @@ const RawViewer: (props: ViewerProps) => any = ({ data, className }) => {
                 <BulletList key={listItem.id}>{listItem.children.map((leaf: any) => renderProperty(leaf))}</BulletList>
               );
             })}
+          </ul>
+        );
+      }
+      if (node.type === LIST_ITEM) {
+        return (
+          <ul key={node?.id}>
+            <li>{node.children.map((leaf: any) => renderProperty(leaf))}</li>
           </ul>
         );
       }
