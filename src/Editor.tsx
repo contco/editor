@@ -22,6 +22,7 @@ import HOTKEYS from './constant/HotKeys';
 
 interface Props {
   data?: any;
+  rawData?: any;
   onContentUpdate: (content: any) => void;
   initialData?: any;
   readOnly?: boolean;
@@ -35,6 +36,7 @@ interface Props {
 
 const Editor: (props: Props) => any = ({
   data,
+  rawData,
   onContentUpdate,
   readOnly = false,
   placeholder = '',
@@ -49,11 +51,13 @@ const Editor: (props: Props) => any = ({
   const renderLeaf = useCallback((props) => <Leaf {...props} placeholderStyles={placeholderStyles} />, []);
 
   useEffect(() => {
-    if (data.length) {
+    if (data && data?.length) {
       const initialData = deserialize(data);
       setData(initialData);
+    } else if (rawData) {
+      setData(rawData);
     }
-  }, [data]);
+  }, [data, rawData]);
 
   const sendContentToApp = (nodeData: any, operation: string, newNodes: any) => {
     if (!isEmpty(nodeData)) {
