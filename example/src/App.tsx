@@ -22,11 +22,9 @@ const App = () => {
   }, []);
 
   const onContentUpdate = (content: any) => {
-    console.log(11, content)
     setRawContent(content.raw);
     setDocument(content.newChildren)
   };
-  console.log('document--->', document);
   return (
     <div style={{ display: 'flex' }}>
       <div style={{ minHeight: 200, width: '33vw' }}>
