@@ -1,5 +1,6 @@
+/* eslint no-use-before-define: 0 */  // --> OFF
 import React, { useState, useEffect } from 'react';
-import { Editor, Viewer, RawViewer } from 'editor';
+import { Editor } from 'editor';
 import styled from 'styled-components';
 
 const StyledEditor = styled(Editor)`
@@ -8,9 +9,9 @@ const StyledEditor = styled(Editor)`
   overflow-y: auto;
 `;
 
-const StyledRawViewer = styled(RawViewer)`
-  background-color: #f1f1f1;
-`;
+// const StyledRawViewer = styled(RawViewer)`
+//   background-color: #f1f1f1;
+// `;
 
 const App = () => {
   const [document, setDocument] = useState<any>(blockInitalValue1);
@@ -21,12 +22,14 @@ const App = () => {
   }, []);
 
   const onContentUpdate = (content: any) => {
+    console.log(11, content)
     setRawContent(content.raw);
+    setDocument(content.newChildren)
   };
   console.log('document--->', document);
   return (
-    <>
-      <div style={{ minHeight: 200 }}>
+    <div style={{ display: 'flex' }}>
+      <div style={{ minHeight: 200, width: '33vw' }}>
         <StyledEditor
           placeholder="Click anywhere to start typing"
           placeholderStyles={{ color: 'blue', fontWeight: 'bold' }}
@@ -34,9 +37,25 @@ const App = () => {
           onContentUpdate={onContentUpdate}
         />
       </div>
-      <Viewer data={document} />
-      {rawContent ? <StyledRawViewer data={rawContent} /> : null}
-    </>
+      {/* <Viewer data={document} /> */}
+      {/* {rawContent ? <StyledRawViewer data={rawContent} /> : null} */}
+      <div>
+        <h3>Raw Data</h3>
+        <div style={{ width: '33vw', height: '500px', overflowY: 'scroll' }}>
+          <pre>
+            {JSON.stringify(rawContent || blockRawValue, undefined, 2)}
+          </pre>
+        </div>
+      </div>
+      <div>
+        <h3>Serialized Data</h3>
+        <div style={{ width: '33vw', height: '500px', overflowY: 'scroll' }}>
+          <pre>
+            {JSON.stringify(document, undefined, 2)}
+          </pre>
+        </div>
+      </div>
+    </div>
   );
 };
 const blockInitalValue1 = [
@@ -129,5 +148,138 @@ const blockInitalValue2 = [
     ],
   },
 ];
+
+const blockRawValue = [
+  {
+    "id": "1",
+    "type": "heading-one",
+    "children": [
+      {
+        "text": "  Heading One",
+        "italic": true,
+        "underlined": true
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "type": "heading-two",
+    "children": [
+      {
+        "text": "   Heading Two"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "type": "block-quote",
+    "children": [
+      {
+        "text": "What Goes Around Comes Around"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "        This is editable, "
+      },
+      {
+        "text": "rich ",
+        "bold": true
+      },
+      {
+        "text": "text",
+        "bold": true,
+        "underlined": true
+      },
+      {
+        "text": ", much ",
+        "bold": true,
+        "italic": true
+      },
+      {
+        "text": "better than a"
+      },
+      {
+        "text": "Hello World",
+        "code": true
+      },
+      {
+        "type": "link",
+        "url": "https://google.com",
+        "children": [
+          {
+            "text": "link check"
+          }
+        ]
+      },
+      {
+        "text": " better than a"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "type": "numbered-list",
+    "children": [
+      {
+        "id": "6",
+        "type": "list-item",
+        "children": [
+          {
+            "text": "number list point 1"
+          }
+        ]
+      },
+      {
+        "id": "7",
+        "type": "list-item",
+        "children": [
+          {
+            "text": "number list point 2 ",
+            "bold": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "8",
+    "type": "bulleted-list",
+    "children": [
+      {
+        "id": "9",
+        "type": "list-item",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "id": "349748935370791158",
+        "type": "list-item",
+        "children": [
+          {
+            "text": "sBulleted list point 1"
+          }
+        ]
+      },
+      {
+        "id": "10",
+        "type": "list-item",
+        "children": [
+          {
+            "text": "Bulleted list point 2 ",
+            "bold": true
+          }
+        ]
+      }
+    ]
+  }
+]
 
 export default App;
