@@ -9,9 +9,10 @@ const StyledEditor = styled(Editor)`
   overflow-y: auto;
 `;
 
-// const StyledRawViewer = styled(RawViewer)`
-//   background-color: #f1f1f1;
-// `;
+/*
+const StyledRawViewer = styled(RawViewer)`
+  background-color: #f1f1f1;
+`; */
 
 const App = () => {
   const [document, setDocument] = useState<any>(blockInitalValue1);
